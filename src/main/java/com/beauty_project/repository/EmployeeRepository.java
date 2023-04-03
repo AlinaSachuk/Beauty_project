@@ -6,6 +6,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
+import java.util.ArrayList;
+
 @Repository
 public class EmployeeRepository {
     private final SessionFactory sessionFactory;
@@ -16,13 +19,19 @@ public class EmployeeRepository {
 
     public Employee getEmployeeById(int id) {
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
         Employee employee = session.get(Employee.class, id);
-        session.getTransaction().commit();
         session.close();
         if (employee != null) {
             return employee;
         }
         return new Employee();
+    }
+
+    public ArrayList<Employee> getAllEmployees(){
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Employee");
+        ArrayList<Employee> list = (ArrayList<Employee>) query.getResultList();
+        session.close();
+        return list;
     }
 }

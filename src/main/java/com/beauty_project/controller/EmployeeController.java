@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -28,5 +30,11 @@ public class EmployeeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(employee, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<ArrayList<Employee>> getAllEmployees() {
+        ArrayList<Employee> list = employeeService.getAllEmployees();
+        return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 }

@@ -5,6 +5,8 @@ import com.beauty_project.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class EmployeeService {
     EmployeeRepository employeeRepository;
@@ -15,7 +17,10 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(int id) {
-     //   return employeeRepository.getEmployeeById(id);
-        return new Employee();
+     return employeeRepository.getEmployeeById(id);
+    }
+
+    public ArrayList<Employee> getAllEmployees(){
+        return employeeRepository.getAllEmployees();
     }
 }
