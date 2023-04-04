@@ -6,6 +6,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
+import java.util.ArrayList;
+
 @Repository
 public class ProceduresRepository {
     private final SessionFactory sessionFactory;
@@ -22,5 +25,13 @@ public class ProceduresRepository {
             return procedure;
         }
         return new Procedures();
+    }
+
+    public ArrayList<Procedures> getAllProcedures(){
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Procedures");
+        ArrayList<Procedures> proceduresArrayList = (ArrayList<Procedures>) query.getResultList();
+        session.close();
+        return proceduresArrayList;
     }
 }

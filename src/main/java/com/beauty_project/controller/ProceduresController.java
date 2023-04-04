@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/procedure")
 public class ProceduresController {
@@ -27,5 +29,11 @@ public class ProceduresController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(procedure, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<ArrayList<Procedures>> getAllProcedures(){
+        ArrayList<Procedures> proceduresArrayList = proceduresService.getAllProcedures();
+        return new ResponseEntity<>(proceduresArrayList, (!proceduresArrayList.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 }
