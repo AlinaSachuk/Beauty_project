@@ -11,7 +11,7 @@ public class Procedures {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "service_id_seq_gen")
     @SequenceGenerator(name = "service_id_seq_gen", sequenceName = "services_id_seq", allocationSize = 1)
-    private int id;
+    private Integer id;
 
     @Column(name = "service_name")
     private String serviceName;

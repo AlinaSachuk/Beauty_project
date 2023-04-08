@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class ProceduresService {
@@ -16,11 +17,23 @@ public class ProceduresService {
         this.proceduresRepository = proceduresRepository;
     }
 
-    public Procedures getProcedureById(int id) {
-        return proceduresRepository.getProcedureById(id);
+    public Optional<Procedures> getProcedureById(int id) {
+        return proceduresRepository.findById(id);
     }
 
     public ArrayList<Procedures> getAllProcedures() {
-        return proceduresRepository.getAllProcedures();
+        return (ArrayList<Procedures>) proceduresRepository.findAll();
+    }
+
+    public Procedures createProcedure(Procedures procedure) {
+        return proceduresRepository.save(procedure);
+    }
+
+    public Procedures updateProcedure(Procedures procedure) {
+        return proceduresRepository.saveAndFlush(procedure);
+    }
+
+    public void deleteProcedure(int id) {
+        proceduresRepository.deleteById(id);
     }
 }
