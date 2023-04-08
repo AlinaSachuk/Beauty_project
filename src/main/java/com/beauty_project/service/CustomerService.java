@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -16,11 +17,23 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer getCustomerById(int id) {
-        return customerRepository.getCustomerById(id);
+    public Optional<Customer> getCustomerById(int id) {
+        return customerRepository.findById(id);
     }
 
     public ArrayList<Customer> getAllCustomers() {
-        return customerRepository.getAllCustomers();
+        return (ArrayList<Customer>) customerRepository.findAll();
+    }
+
+    public Customer createCustomer(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    public Customer updateCustomer(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    public void deleteCustomer(int id) {
+        customerRepository.deleteById(id);
     }
 }
