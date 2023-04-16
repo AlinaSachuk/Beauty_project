@@ -25,15 +25,15 @@ public class VisitsService {
         return (ArrayList<Visits>) visitsRepository.findAll();
     }
 
-    public Visits createVisit (Visits visit) {
+    public Visits createVisit(Visits visit) {
         return visitsRepository.save(visit);
     }
 
-    public Visits updateVisit (Visits visit) {
+    public Visits updateVisit(Visits visit) {
         return visitsRepository.saveAndFlush(visit);
     }
 
-    public void deleteVisit (int id) {
+    public void deleteVisit(int id) {
         visitsRepository.deleteById(id);
     }
 }
