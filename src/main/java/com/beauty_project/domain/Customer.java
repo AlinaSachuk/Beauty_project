@@ -1,7 +1,6 @@
 package com.beauty_project.domain;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -31,9 +30,6 @@ public class Customer {
     @Column(name = "instagram_account")
     private String instagramAccount;
 
-    @Column(name = "status_silver")
-    private boolean statusSilver;
-
-    @Column(name = "status_gold")
-    private boolean statusGold;
+    @Column(name = "status")
+    private String status;
 }
