@@ -1,15 +1,14 @@
 package com.beauty_project.domain;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Data
 @Entity
-@Table(name = "visits")
-public class Visits {
+@Table(name = "visit")
+public class Visit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "visit_id_seq_gen")
@@ -21,4 +20,7 @@ public class Visits {
 
     @Column(name = "final_price")
     private int finalPrice;
+
+    @Column(name = "customer_id")
+    private int customerId;
 }

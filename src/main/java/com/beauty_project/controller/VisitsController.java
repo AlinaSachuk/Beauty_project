@@ -1,6 +1,6 @@
 package com.beauty_project.controller;
 
-import com.beauty_project.domain.Visits;
+import com.beauty_project.domain.Visit;
 import com.beauty_project.service.VisitsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +21,8 @@ public class VisitsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Visits>> getVisitById(@PathVariable int id) {
-        Optional<Visits> visit = visitsService.getVisitById(id);
+    public ResponseEntity<Optional<Visit>> getVisitById(@PathVariable int id) {
+        Optional<Visit> visit = visitsService.getVisitById(id);
         if (visit.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -30,24 +30,24 @@ public class VisitsController {
     }
 
     @GetMapping
-    public ResponseEntity<ArrayList<Visits>> getAllVisits() {
-        ArrayList<Visits> list = visitsService.getAllVisits();
+    public ResponseEntity<ArrayList<Visit>> getAllVisits() {
+        ArrayList<Visit> list = visitsService.getAllVisits();
         return new ResponseEntity<>(list, !list.isEmpty() ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping
-    public ResponseEntity<HttpStatus> createVisit(@RequestBody Visits visit) {
-        visitsService.createVisit(visit);
+    @PostMapping("/{id}")
+    public ResponseEntity<HttpStatus> createVisit(@RequestBody Visit visit, @PathVariable int id) {
+        visitsService.createVisit(visit, id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateVisit(@RequestBody Visits visit) {
+    public void updateVisit(@RequestBody Visit visit) {
         visitsService.updateVisit(visit);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Visits> deleteVisit(@PathVariable int id) {
+    public ResponseEntity<Visit> deleteVisit(@PathVariable int id) {
         visitsService.deleteVisit(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
