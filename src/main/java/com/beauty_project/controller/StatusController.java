@@ -43,4 +43,9 @@ public class StatusController {
         statusService.createStatus(status);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @PutMapping
+    public void updateStatus(@RequestBody Status status) {
+        statusService.updateStatus(status);
+    }
 }
