@@ -38,5 +38,9 @@ public class StatusController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-
+    @PostMapping
+    public ResponseEntity<HttpStatus> createStatus(@RequestBody Status status) {
+        statusService.createStatus(status);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }
