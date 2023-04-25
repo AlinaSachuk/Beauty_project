@@ -1,7 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Visit;
-import com.beauty_project.service.VisitsService;
+import com.beauty_project.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,17 +12,17 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/visit")
-public class VisitsController {
-    VisitsService visitsService;
+public class VisitController {
+    VisitService visitService;
 
     @Autowired
-    public VisitsController(VisitsService visitsService) {
-        this.visitsService = visitsService;
+    public VisitController(VisitService visitService) {
+        this.visitService = visitService;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Visit>> getVisitById(@PathVariable int id) {
-        Optional<Visit> visit = visitsService.getVisitById(id);
+        Optional<Visit> visit = visitService.getVisitById(id);
         if (visit.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -31,24 +31,24 @@ public class VisitsController {
 
     @GetMapping
     public ResponseEntity<ArrayList<Visit>> getAllVisits() {
-        ArrayList<Visit> list = visitsService.getAllVisits();
+        ArrayList<Visit> list = visitService.getAllVisits();
         return new ResponseEntity<>(list, !list.isEmpty() ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/{id}")
     public ResponseEntity<HttpStatus> createVisit(@RequestBody Visit visit, @PathVariable int id) {
-        visitsService.createVisit(visit, id);
+        visitService.createVisit(visit, id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
     public void updateVisit(@RequestBody Visit visit) {
-        visitsService.updateVisit(visit);
+        visitService.updateVisit(visit);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Visit> deleteVisit(@PathVariable int id) {
-        visitsService.deleteVisit(id);
+        visitService.deleteVisit(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
