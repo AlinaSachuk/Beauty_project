@@ -48,4 +48,10 @@ public class StatusController {
     public void updateStatus(@RequestBody Status status) {
         statusService.updateStatus(status);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteStatus(@PathVariable int id) {
+        statusService.deleteStatus(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
