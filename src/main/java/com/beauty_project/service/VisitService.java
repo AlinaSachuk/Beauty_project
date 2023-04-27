@@ -3,6 +3,7 @@ package com.beauty_project.service;
 import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.Visit;
 import com.beauty_project.repository.CustomerRepository;
+import com.beauty_project.repository.StatusRepository;
 import com.beauty_project.repository.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,13 @@ import java.util.Optional;
 public class VisitService {
     VisitRepository visitRepository;
     CustomerRepository customerRepository;
+    StatusRepository statusRepository;
 
     @Autowired
-    public VisitService(VisitRepository visitRepository, CustomerRepository customerRepository) {
+    public VisitService(VisitRepository visitRepository, CustomerRepository customerRepository, StatusRepository statusRepository) {
         this.visitRepository = visitRepository;
         this.customerRepository = customerRepository;
+        this.statusRepository = statusRepository;
     }
 
     public Optional<Visit> getVisitById(int id) {
@@ -33,8 +36,11 @@ public class VisitService {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Customer by id not found: " + id));
         visit.setCustomerId(customer.getId());
-//        customer.getStatus().getPercent()
-//        setFinalPrice(.getFinalPrice() *(100-status.percent)/100)
+        if (customer.getStatus() == null) {
+            visit.setFinalPrice(visit.getFinalPrice());
+        }
+        int discountPercent = statusRepository.findPercentByStatus(customer.getStatus());
+        visit.setFinalPrice(visit.getFinalPrice()*(100-discountPercent)/100);
         return visitRepository.save(visit);
     }
 
