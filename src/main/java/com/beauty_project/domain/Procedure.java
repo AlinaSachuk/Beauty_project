@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "procedures")
-public class Procedures {
+public class Procedure {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "service_id_seq_gen")
     @SequenceGenerator(name = "service_id_seq_gen", sequenceName = "services_id_seq", allocationSize = 1)
