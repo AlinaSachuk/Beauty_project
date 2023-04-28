@@ -1,12 +1,19 @@
 package com.beauty_project.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "procedures")
+@ToString(exclude = "productList")
+@EqualsAndHashCode(exclude = "productList")
 public class Procedure {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "service_id_seq_gen")
@@ -24,4 +31,11 @@ public class Procedure {
 
     @Column(name = "description")
     private String description;
+
+    @JsonManagedReference
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name = "l_proced_prod",
+            joinColumns = {@JoinColumn(name = "procedure_id")},
+            inverseJoinColumns = {@JoinColumn(name = "prod_id")})
+    private Set<CosmeticProduct> productList = new HashSet<>();
 }
