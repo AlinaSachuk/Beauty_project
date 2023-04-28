@@ -14,7 +14,9 @@ import java.util.Optional;
 @Service
 public class VisitService {
     VisitRepository visitRepository;
+
     CustomerRepository customerRepository;
+
     StatusRepository statusRepository;
 
     @Autowired
