@@ -1,7 +1,9 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Customer;
+import com.beauty_project.domain.Visit;
 import com.beauty_project.service.CustomerService;
+import com.beauty_project.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +23,12 @@ import java.util.Optional;
 @RequestMapping("/customer")
 public class CustomerController {
     CustomerService customerService;
+    VisitService visitService;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerService customerService, VisitService visitService) {
         this.customerService = customerService;
+        this.visitService = visitService;
     }
 
     @GetMapping("/{id}")
@@ -39,6 +43,12 @@ public class CustomerController {
     @GetMapping
     public ResponseEntity<ArrayList<Customer>> getAllCustomers() {
         ArrayList<Customer> list = customerService.getAllCustomers();
+        return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/getVisits/{id}")
+    public ResponseEntity<ArrayList<Visit>> getAllVisitsForSingleCustomer(@PathVariable int id) {
+        ArrayList<Visit> list = visitService.getAllVisitsForSingleCustomer(id);
         return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 

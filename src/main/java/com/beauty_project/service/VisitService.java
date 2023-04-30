@@ -8,6 +8,7 @@ import com.beauty_project.repository.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -34,6 +35,12 @@ public class VisitService {
         return (ArrayList<Visit>) visitRepository.findAll();
     }
 
+    public ArrayList<Visit> getAllVisitsForSingleCustomer(int id) {
+        customerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Customer by id not found: " + id));
+        return (ArrayList<Visit>) visitRepository.findVisitsByCustomerId(id);
+    }
+
     public Visit createVisit(Visit visit, int id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Customer by id not found: " + id));
@@ -42,7 +49,7 @@ public class VisitService {
             visit.setFinalPrice(visit.getFinalPrice());
         }
         int discountPercent = statusRepository.findPercentByStatus(customer.getStatus());
-        visit.setFinalPrice(visit.getFinalPrice()*(100-discountPercent)/100);
+        visit.setFinalPrice(visit.getFinalPrice() * (100 - discountPercent) / 100);
         return visitRepository.save(visit);
     }
 
