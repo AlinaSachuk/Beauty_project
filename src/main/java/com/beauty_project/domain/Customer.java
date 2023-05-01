@@ -38,4 +38,7 @@ public class Customer {
 
     @Column(name = "status")
     private String status;
+
+    @Column(name = "password")
+    private String password;
 }
