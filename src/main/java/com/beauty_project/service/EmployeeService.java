@@ -4,6 +4,7 @@ import com.beauty_project.domain.Employee;
 import com.beauty_project.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -30,10 +31,12 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Employee employee) {
+        employeeRepository.findById(employee.getId()).orElseThrow(() -> new NotFoundException("Procedure with id=" + employee.getId() + " not found"));
         return employeeRepository.saveAndFlush(employee);
     }
 
     public void deleteEmployee(int id) {
+        employeeRepository.findById(id).orElseThrow(() -> new NotFoundException("Procedure with id=" + id + " not found"));
         employeeRepository.deleteById(id);
     }
 }
