@@ -37,7 +37,7 @@ public class VisitService {
 
     public ArrayList<Visit> getAllVisitsForSingleCustomer(int id) {
         customerRepository.findById(id)
-                .orElseThrow(()-> new NotFoundException("Customer by id not found: " + id));
+                .orElseThrow(() -> new NotFoundException("Customer by id not found: " + id));
         return (ArrayList<Visit>) visitRepository.findVisitsByCustomerId(id);
     }
 
@@ -54,10 +54,12 @@ public class VisitService {
     }
 
     public Visit updateVisit(Visit visit) {
+        visitRepository.findById(visit.getId()).orElseThrow(() -> new NotFoundException("Visit with id=" + visit.getId() + " not found"));
         return visitRepository.saveAndFlush(visit);
     }
 
     public void deleteVisit(int id) {
+        visitRepository.findById(id).orElseThrow(() -> new NotFoundException("Visit with id=" + id + " not found"));
         visitRepository.deleteById(id);
     }
 }
