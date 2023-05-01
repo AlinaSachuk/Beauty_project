@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Data
@@ -27,9 +30,11 @@ public class Customer {
     @Column(name = "birth_date")
     private Date birthDate;
 
+    @Pattern(regexp = "[0-9]{11}")
     @Column(name = "telephone_number")
     private String telephoneNumber;
 
+    @Email
     @Column(name = "email")
     private String email;
 
@@ -39,6 +44,7 @@ public class Customer {
     @Column(name = "status")
     private String status;
 
+    @Size(min = 5)
     @Column(name = "password")
     private String password;
 }
