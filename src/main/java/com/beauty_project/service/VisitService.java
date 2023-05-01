@@ -7,8 +7,8 @@ import com.beauty_project.repository.StatusRepository;
 import com.beauty_project.repository.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -37,13 +37,13 @@ public class VisitService {
 
     public ArrayList<Visit> getAllVisitsForSingleCustomer(int id) {
         customerRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Customer by id not found: " + id));
+                .orElseThrow(()-> new NotFoundException("Customer by id not found: " + id));
         return (ArrayList<Visit>) visitRepository.findVisitsByCustomerId(id);
     }
 
     public Visit createVisit(Visit visit, int id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Customer by id not found: " + id));
+                .orElseThrow(() -> new NotFoundException("Customer by id not found: " + id));
         visit.setCustomerId(customer.getId());
         if (customer.getStatus() == null) {
             visit.setFinalPrice(visit.getFinalPrice());
