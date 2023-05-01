@@ -4,6 +4,7 @@ import com.beauty_project.domain.Status;
 import com.beauty_project.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -30,10 +31,12 @@ public class StatusService {
     }
 
     public Status updateStatus(Status status) {
+        statusRepository.findById(status.getId()).orElseThrow(() -> new NotFoundException("Status with id=" + status.getId() + " not found"));
         return statusRepository.saveAndFlush(status);
     }
 
     public void deleteStatus(int id) {
+        statusRepository.findById(id).orElseThrow(() -> new NotFoundException("Status with id=" + id + " not found"));
         statusRepository.deleteById(id);
     }
 }
