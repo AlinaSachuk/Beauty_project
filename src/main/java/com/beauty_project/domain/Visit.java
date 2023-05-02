@@ -25,7 +25,7 @@ public class Visit {
     private Date dateOfVisit;
 
     @Column(name = "final_price")
-    private int finalPrice;
+    private double finalPrice;
 
     @Column(name = "customer_id")
     private int customerId;
