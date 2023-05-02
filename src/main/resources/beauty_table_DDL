@@ -1,0 +1,109 @@
+create table public.employee_table
+(
+    id              bigserial
+        primary key,
+    name            varchar not null,
+    position        varchar not null,
+    education       varchar not null,
+    work_experience varchar not null
+);
+
+alter table public.employee_table
+    owner to postgres;
+
+create table public.procedures
+(
+    id           bigint default nextval('services_id_seq'::regclass) not null
+        constraint services_pkey
+            primary key,
+    service_name varchar                                             not null
+        constraint services_service_name_key
+            unique,
+    duration     integer                                             not null,
+    price        integer                                             not null,
+    description  varchar(600)                                        not null
+);
+
+alter table public.procedures
+    owner to postgres;
+
+create table public.cosmetic_products
+(
+    id                bigserial
+        primary key,
+    product_name      varchar not null
+        unique,
+    manufacture       varchar not null,
+    country_of_origin varchar not null
+);
+
+alter table public.cosmetic_products
+    owner to postgres;
+
+create table public.l_proced_prod
+(
+    id           bigint default nextval('l_serv_prod_id_seq'::regclass) not null
+        constraint l_serv_prod_pkey
+            primary key,
+    procedure_id integer                                                not null
+        constraint l_serv_prod_services_id_fk
+            references public.procedures
+            on update cascade on delete cascade,
+    prod_id      integer                                                not null
+        constraint l_serv_prod_cosmetic_products_id_fk
+            references public.cosmetic_products
+            on update cascade on delete cascade
+);
+
+alter table public.l_proced_prod
+    owner to postgres;
+
+create table public.status_table
+(
+    status  varchar
+        constraint status_status_key
+            unique,
+    percent integer,
+    id      integer default nextval('status_id_seq'::regclass) not null
+        constraint status_pkey
+            primary key
+);
+
+alter table public.status_table
+    owner to postgres;
+
+create table public.customer_table
+(
+    id                bigserial
+        primary key,
+    name              varchar not null,
+    birth_date        date    not null,
+    telephone_number  varchar not null
+        unique,
+    email             varchar,
+    instagram_account varchar
+        unique,
+    status            varchar
+        constraint customer_table_status_fk
+            references public.status_table (status),
+    password          varchar not null
+);
+
+alter table public.customer_table
+    owner to postgres;
+
+create table public.visit_table
+(
+    id            bigint default nextval('visits_id_seq'::regclass) not null
+        constraint visits_pkey
+            primary key,
+    date_of_visit date                                              not null,
+    final_price   double precision                                  not null,
+    customer_id   integer                                           not null
+        constraint visits_customer_table_id_fk
+            references public.customer_table
+            on update cascade on delete cascade
+);
+
+alter table public.visit_table
+    owner to postgres;
