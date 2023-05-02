@@ -50,6 +50,9 @@ public class VisitService {
         }
         int discountPercent = statusRepository.findPercentByStatus(customer.getStatus());
         visit.setFinalPrice(visit.getFinalPrice() * (100 - discountPercent) / 100);
+        if (visit.getFinalPrice() == 0 | visit.getFinalPrice() < 0) {
+            throw new ArithmeticException("Arithmetic exception in final price: " + visit.getFinalPrice());
+        }
         return visitRepository.save(visit);
     }
 

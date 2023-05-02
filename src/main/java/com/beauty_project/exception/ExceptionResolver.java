@@ -17,4 +17,10 @@ public class ExceptionResolver {
         log.warn("NotFoundException: " + e.getMessage());
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(ArithmeticException.class)
+    public ResponseEntity<HttpStatus> arithmeticException(Exception e) {
+        log.warn("ArithmeticException: " + e.getMessage());
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 }
