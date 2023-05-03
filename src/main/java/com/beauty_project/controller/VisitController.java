@@ -23,7 +23,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/visit")
 public class VisitController {
-    private VisitService visitService;
+    VisitService visitService;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -36,7 +36,7 @@ public class VisitController {
     public ResponseEntity<Optional<Visit>> getVisitById(@PathVariable int id) {
         Optional<Visit> visit = visitService.getVisitById(id);
         if (visit.isEmpty()) {
-            log.warn("Visit with id=" + id + " not found: updateVisit method.");
+            log.warn("Visit with id=" + id + " not found: getVisitById method.");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(visit, HttpStatus.OK);
