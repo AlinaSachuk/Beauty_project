@@ -2,6 +2,8 @@ package com.beauty_project.controller;
 
 import com.beauty_project.domain.Status;
 import com.beauty_project.service.StatusService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import java.util.Optional;
 @RequestMapping("/status")
 public class StatusController {
     StatusService statusService;
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public StatusController(StatusService statusService) {
@@ -31,6 +34,7 @@ public class StatusController {
     public ResponseEntity<Optional<Status>> getStatusById(@PathVariable int id) {
         Optional<Status> status = statusService.getStatusById(id);
         if (status.isEmpty()) {
+            log.warn("Status with id=" + id + " not found: getStatusById method.");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(status, HttpStatus.OK);
@@ -40,6 +44,7 @@ public class StatusController {
     public ResponseEntity<ArrayList<Status>> getAllStatus() {
         ArrayList<Status> list = statusService.getAllStatus();
         if (list.isEmpty()) {
+            log.warn("Something went wrong in getAllStatus method.");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
@@ -48,6 +53,10 @@ public class StatusController {
     @PostMapping
     public ResponseEntity<HttpStatus> createStatus(@RequestBody Status status) {
         statusService.createStatus(status);
+        if (status == null) {
+            log.warn("Something went wrong: status not created");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
