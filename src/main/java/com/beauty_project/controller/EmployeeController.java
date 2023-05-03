@@ -2,6 +2,8 @@ package com.beauty_project.controller;
 
 import com.beauty_project.domain.Employee;
 import com.beauty_project.service.EmployeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ import java.util.Optional;
 public class EmployeeController {
 
     EmployeeService employeeService;
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public EmployeeController(EmployeeService employeeService) {
@@ -32,6 +35,7 @@ public class EmployeeController {
     public ResponseEntity<Optional<Employee>> getEmployeeById(@PathVariable int id) {
         Optional<Employee> employee = employeeService.getEmployeeById(id);
         if (employee.isEmpty()) {
+            log.warn("Employee with id=" + id + " not found: getEmployeeById method.");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(employee, HttpStatus.OK);
@@ -40,12 +44,19 @@ public class EmployeeController {
     @GetMapping
     public ResponseEntity<ArrayList<Employee>> getAllEmployees() {
         ArrayList<Employee> list = employeeService.getAllEmployees();
+        if (list.isEmpty()) {
+            log.warn("Something went wrong in getAllEmployees method.");
+        }
         return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
     public ResponseEntity<HttpStatus> createEmployee(@RequestBody Employee employee) {
         employeeService.createEmployee(employee);
+        if (employee == null) {
+            log.warn("Something went wrong: employee not created");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
