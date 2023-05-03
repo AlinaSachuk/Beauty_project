@@ -26,7 +26,7 @@ import java.util.Optional;
 public class CustomerController {
     CustomerService customerService;
     VisitService visitService;
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
 
     @Autowired
     public CustomerController(CustomerService customerService, VisitService visitService) {
@@ -47,9 +47,6 @@ public class CustomerController {
     @GetMapping
     public ResponseEntity<ArrayList<Customer>> getAllCustomers() {
         ArrayList<Customer> list = customerService.getAllCustomers();
-        if (list.isEmpty()) {
-            log.warn("Something went wrong in getAllCustomers method.");
-        }
         return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
@@ -62,10 +59,6 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<HttpStatus> createCustomer(@RequestBody Customer customer) {
         customerService.createCustomer(customer);
-        if (customer == null) {
-            log.warn("Something went wrong: customer not created");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
