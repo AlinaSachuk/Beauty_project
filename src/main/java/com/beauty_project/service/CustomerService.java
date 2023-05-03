@@ -4,7 +4,6 @@ import com.beauty_project.domain.Customer;
 import com.beauty_project.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -31,12 +30,10 @@ public class CustomerService {
     }
 
     public Customer updateCustomer(Customer customer) {
-        customerRepository.findById(customer.getId()).orElseThrow(() -> new NotFoundException("Customer with id=" + customer.getId() + " not found: updateCustomer method."));
         return customerRepository.save(customer);
     }
 
     public void deleteCustomer(int id) {
-        customerRepository.findById(id).orElseThrow(() -> new NotFoundException("Customer with id=" + id + " not found: deleteCustomer method."));
         customerRepository.deleteById(id);
     }
 }
