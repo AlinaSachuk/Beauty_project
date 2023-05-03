@@ -12,7 +12,7 @@ import org.webjars.NotFoundException;
 @RestControllerAdvice
 public class ExceptionResolver {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final Logger log = LoggerFactory.getLogger(ExceptionResolver.class);
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<HttpStatus> handleException(NotFoundException e) {
