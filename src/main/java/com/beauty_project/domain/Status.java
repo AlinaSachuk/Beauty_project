@@ -24,5 +24,4 @@ public class Status {
 
     @Column(name = "percent")
     private int percent;
-
 }
