@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Table(name = "status")
+@Table(name = "status_table")
 public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "status_id_seq_gen")
