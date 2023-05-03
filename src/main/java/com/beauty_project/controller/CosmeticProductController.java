@@ -2,6 +2,8 @@ package com.beauty_project.controller;
 
 import com.beauty_project.domain.CosmeticProduct;
 import com.beauty_project.service.CosmeticProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ import java.util.Optional;
 @RequestMapping("/product")
 public class CosmeticProductController {
     CosmeticProductService cosmeticProductService;
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public CosmeticProductController(CosmeticProductService cosmeticProductService) {
@@ -32,6 +35,7 @@ public class CosmeticProductController {
     public ResponseEntity<Optional<CosmeticProduct>> getCosmeticProductById(@PathVariable int id) {
         Optional<CosmeticProduct> product = cosmeticProductService.getCosmeticProductById(id);
         if (product.isEmpty()) {
+            log.warn("CosmeticProduct with id=" + id + " not found: getCosmeticProductById method.");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(product, HttpStatus.OK);
@@ -40,12 +44,19 @@ public class CosmeticProductController {
     @GetMapping
     public ResponseEntity<AbstractList<CosmeticProduct>> getAllCosmeticProducts() {
         ArrayList<CosmeticProduct> list = cosmeticProductService.getAllCosmeticProducts();
+        if (list.isEmpty()) {
+            log.warn("Something went wrong in getAllCosmeticProducts method.");
+        }
         return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
     public ResponseEntity<HttpStatus> createCosmeticProduct(@RequestBody CosmeticProduct product) {
         cosmeticProductService.createCosmeticProduct(product);
+        if (product == null) {
+            log.warn("Something went wrong: cosmetic product not created");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
