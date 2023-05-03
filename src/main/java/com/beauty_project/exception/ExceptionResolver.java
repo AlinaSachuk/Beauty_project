@@ -15,7 +15,7 @@ public class ExceptionResolver {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<HttpStatus> notFound(Exception e) {
         log.warn("NotFoundException: " + e.getMessage());
-        return new ResponseEntity<>(HttpStatus.CONFLICT);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ArithmeticException.class)
