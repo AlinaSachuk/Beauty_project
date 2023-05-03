@@ -4,6 +4,8 @@ import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.Visit;
 import com.beauty_project.service.CustomerService;
 import com.beauty_project.service.VisitService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ import java.util.Optional;
 public class CustomerController {
     CustomerService customerService;
     VisitService visitService;
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public CustomerController(CustomerService customerService, VisitService visitService) {
@@ -35,6 +38,7 @@ public class CustomerController {
     public ResponseEntity<Optional<Customer>> getCustomerById(@PathVariable int id) {
         Optional<Customer> customer = customerService.getCustomerById(id);
         if (customer.isEmpty()) {
+            log.warn("Customer with id=" + id + " not found: getCustomerById method.");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(customer, HttpStatus.OK);
@@ -43,6 +47,9 @@ public class CustomerController {
     @GetMapping
     public ResponseEntity<ArrayList<Customer>> getAllCustomers() {
         ArrayList<Customer> list = customerService.getAllCustomers();
+        if (list.isEmpty()) {
+            log.warn("Something went wrong in getAllCustomers method.");
+        }
         return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
@@ -55,6 +62,10 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<HttpStatus> createCustomer(@RequestBody Customer customer) {
         customerService.createCustomer(customer);
+        if (customer == null) {
+            log.warn("Something went wrong: customer not created");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
