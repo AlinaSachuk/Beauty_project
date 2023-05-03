@@ -59,7 +59,7 @@ public class VisitController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Visit> deleteVisit(@PathVariable int id) {
+    public ResponseEntity<HttpStatus> deleteVisit(@PathVariable int id) {
         visitService.deleteVisit(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
