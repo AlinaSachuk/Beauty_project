@@ -31,12 +31,12 @@ public class StatusService {
     }
 
     public Status updateStatus(Status status) {
-        statusRepository.findById(status.getId()).orElseThrow(() -> new NotFoundException("Status with id=" + status.getId() + " not found"));
+        statusRepository.findById(status.getId()).orElseThrow(() -> new NotFoundException("Status with id=" + status.getId() + " not found: updateStatus method."));
         return statusRepository.saveAndFlush(status);
     }
 
     public void deleteStatus(int id) {
-        statusRepository.findById(id).orElseThrow(() -> new NotFoundException("Status with id=" + id + " not found"));
+        statusRepository.findById(id).orElseThrow(() -> new NotFoundException("Status with id=" + id + " not found:  deleteStatus method."));
         statusRepository.deleteById(id);
     }
 }

@@ -37,13 +37,13 @@ public class VisitService {
 
     public ArrayList<Visit> getAllVisitsForSingleCustomer(int id) {
         customerRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Customer by id not found: " + id));
+                .orElseThrow(() -> new NotFoundException("Customer by id=" + id + " not found: getAllVisitsForSingleCustomer method."));
         return (ArrayList<Visit>) visitRepository.findVisitsByCustomerId(id);
     }
 
     public Visit createVisit(Visit visit, int id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Customer by id not found: " + id));
+                .orElseThrow(() -> new NotFoundException("Customer by id=" + id + " not found: createVisit method."));
         visit.setCustomerId(customer.getId());
         if (customer.getStatus() == null) {
             visit.setFinalPrice(visit.getFinalPrice());
@@ -51,18 +51,18 @@ public class VisitService {
         int discountPercent = statusRepository.findPercentByStatus(customer.getStatus());
         visit.setFinalPrice(visit.getFinalPrice() * (100 - discountPercent) / 100);
         if (visit.getFinalPrice() == 0 | visit.getFinalPrice() < 0) {
-            throw new ArithmeticException("Arithmetic exception in final price: " + visit.getFinalPrice());
+            throw new ArithmeticException("Arithmetic exception in final price. Incorrect price - " + visit.getFinalPrice());
         }
         return visitRepository.save(visit);
     }
 
     public Visit updateVisit(Visit visit) {
-        visitRepository.findById(visit.getId()).orElseThrow(() -> new NotFoundException("Visit with id=" + visit.getId() + " not found"));
+        visitRepository.findById(visit.getId()).orElseThrow(() -> new NotFoundException("Visit with id=" + visit.getId() + " not found: updateVisit method."));
         return visitRepository.saveAndFlush(visit);
     }
 
     public void deleteVisit(int id) {
-        visitRepository.findById(id).orElseThrow(() -> new NotFoundException("Visit with id=" + id + " not found"));
+        visitRepository.findById(id).orElseThrow(() -> new NotFoundException("Visit with id=" + id + " not found: deleteVisit method."));
         visitRepository.deleteById(id);
     }
 }

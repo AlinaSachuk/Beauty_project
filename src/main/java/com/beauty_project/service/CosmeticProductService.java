@@ -32,12 +32,12 @@ public class CosmeticProductService {
     }
 
     public CosmeticProduct updateCosmeticProduct(CosmeticProduct product) {
-        cosmeticProductRepository.findById(product.getId()).orElseThrow(() -> new NotFoundException("Cosmetic product with id=" + product.getId() + " not found"));
+        cosmeticProductRepository.findById(product.getId()).orElseThrow(() -> new NotFoundException("Cosmetic product with id=" + product.getId() + " not found: updateCosmeticProduct method."));
         return cosmeticProductRepository.save(product);
     }
 
     public void deleteCosmeticProduct(int id) {
-        cosmeticProductRepository.findById(id).orElseThrow(() -> new NotFoundException("Cosmetic product with id=" + id + " not found"));
+        cosmeticProductRepository.findById(id).orElseThrow(() -> new NotFoundException("Cosmetic product with id=" + id + " not found: deleteCosmeticProduct method."));
         cosmeticProductRepository.deleteById(id);
     }
 }

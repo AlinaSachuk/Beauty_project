@@ -31,12 +31,12 @@ public class ProcedureService {
     }
 
     public Procedure updateProcedure(Procedure procedure) {
-        procedureRepository.findById(procedure.getId()).orElseThrow(() -> new NotFoundException("Procedure with id=" + procedure.getId() + " not found"));
+        procedureRepository.findById(procedure.getId()).orElseThrow(() -> new NotFoundException("Procedure with id=" + procedure.getId() + " not found: updateProcedure method."));
         return procedureRepository.saveAndFlush(procedure);
     }
 
     public void deleteProcedure(int id) {
-        procedureRepository.findById(id).orElseThrow(() -> new NotFoundException("Procedure with id=" + id + " not found"));
+        procedureRepository.findById(id).orElseThrow(() -> new NotFoundException("Procedure with id=" + id + " not found: deleteProcedure method."));
         procedureRepository.deleteById(id);
     }
 }
