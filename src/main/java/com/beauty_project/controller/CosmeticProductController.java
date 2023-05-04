@@ -1,6 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.CosmeticProduct;
+import com.beauty_project.domain.dto.CreateUpdateCosmeticProductDto;
 import com.beauty_project.service.CosmeticProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,14 +49,14 @@ public class CosmeticProductController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createCosmeticProduct(@RequestBody CosmeticProduct product) {
-        cosmeticProductService.createCosmeticProduct(product);
+    public ResponseEntity<HttpStatus> createCosmeticProduct(@RequestBody CreateUpdateCosmeticProductDto productDto) {
+        cosmeticProductService.createCosmeticProduct(productDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateCosmeticProduct(@RequestBody CosmeticProduct product) {
-        cosmeticProductService.updateCosmeticProduct(product);
+    public void updateCosmeticProduct(@RequestBody CreateUpdateCosmeticProductDto productDto) {
+        cosmeticProductService.updateCosmeticProduct(productDto);
     }
 
     @DeleteMapping("/{id}")

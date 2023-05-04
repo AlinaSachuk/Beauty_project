@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CreateUpdateCosmeticProductDto {
+    private int id;
     private String productName;
     private String manufacture;
     private String countryOfOrigin;
