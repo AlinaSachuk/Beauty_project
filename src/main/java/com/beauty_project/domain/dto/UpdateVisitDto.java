@@ -7,7 +7,8 @@ import java.sql.Date;
 
 @Data
 @AllArgsConstructor
-public class CreateUpdateVisitDto {
+public class UpdateVisitDto {
+    private Integer id;
     private Date dateOfVisit;
     private double finalPrice;
 }
