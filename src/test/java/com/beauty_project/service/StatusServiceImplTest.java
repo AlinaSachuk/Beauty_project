@@ -2,7 +2,6 @@ package com.beauty_project.service;
 
 import com.beauty_project.domain.Status;
 import com.beauty_project.domain.dto.CreateUpdateStatusDto;
-import com.beauty_project.mappers.StatusMapper;
 import com.beauty_project.repository.StatusRepository;
 import com.beauty_project.service.impl.StatusServiceImpl;
 import org.junit.jupiter.api.Test;
