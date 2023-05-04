@@ -1,39 +1,18 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Customer;
-import com.beauty_project.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-@Service
-public class CustomerService {
-    CustomerRepository customerRepository;
+public interface CustomerService {
+    Optional<Customer> getCustomerById(int id);
 
-    @Autowired
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
+    ArrayList<Customer> getAllCustomers();
 
-    public Optional<Customer> getCustomerById(int id) {
-        return customerRepository.findById(id);
-    }
+    Customer createCustomer(Customer customer);
 
-    public ArrayList<Customer> getAllCustomers() {
-        return (ArrayList<Customer>) customerRepository.findAll();
-    }
+    Customer updateCustomer(Customer customer);
 
-    public Customer createCustomer(Customer customer) {
-        return customerRepository.save(customer);
-    }
-
-    public Customer updateCustomer(Customer customer) {
-        return customerRepository.save(customer);
-    }
-
-    public void deleteCustomer(int id) {
-        customerRepository.deleteById(id);
-    }
+    void deleteCustomer(int id);
 }

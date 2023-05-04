@@ -24,8 +24,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
-    CustomerService customerService;
-    VisitService visitService;
+    private final CustomerService customerService;
+    private final VisitService visitService;
     private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
 
     @Autowired
