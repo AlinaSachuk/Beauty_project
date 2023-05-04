@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CreateUpdateEmployeeDto {
+    private Integer id;
     private String employeeName;
     private String position;
     private String education;

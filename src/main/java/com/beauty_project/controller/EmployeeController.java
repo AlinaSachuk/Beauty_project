@@ -1,6 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Employee;
+import com.beauty_project.domain.dto.CreateUpdateEmployeeDto;
 import com.beauty_project.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,14 +49,14 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createEmployee(@RequestBody Employee employee) {
-        employeeService.createEmployee(employee);
+    public ResponseEntity<HttpStatus> createEmployee(@RequestBody CreateUpdateEmployeeDto employeeDto) {
+        employeeService.createEmployee(employeeDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateEmployee(@RequestBody Employee employee) {
-        employeeService.updateEmployee(employee);
+    public void updateEmployee(@RequestBody CreateUpdateEmployeeDto employeeDto) {
+        employeeService.updateEmployee(employeeDto);
     }
 
     @DeleteMapping("/{id}")
