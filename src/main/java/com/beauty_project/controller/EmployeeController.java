@@ -23,7 +23,7 @@ import java.util.Optional;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-    EmployeeService employeeService;
+    private final EmployeeService employeeService;
     private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
     @Autowired

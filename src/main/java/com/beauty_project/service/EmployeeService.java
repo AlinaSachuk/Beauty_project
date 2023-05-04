@@ -1,39 +1,18 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Employee;
-import com.beauty_project.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-@Service
-public class EmployeeService {
-    EmployeeRepository employeeRepository;
+public interface EmployeeService {
+    Optional<Employee> getEmployeeById(int id);
 
-    @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+    ArrayList<Employee> getAllEmployees();
 
-    public Optional<Employee> getEmployeeById(int id) {
-        return employeeRepository.findById(id);
-    }
+    Employee createEmployee(Employee employee);
 
-    public ArrayList<Employee> getAllEmployees() {
-        return (ArrayList<Employee>) employeeRepository.findAll();
-    }
+    Employee updateEmployee(Employee employee);
 
-    public Employee createEmployee(Employee employee) {
-        return employeeRepository.save(employee);
-    }
-
-    public Employee updateEmployee(Employee employee) {
-        return employeeRepository.saveAndFlush(employee);
-    }
-
-    public void deleteEmployee(int id) {
-        employeeRepository.deleteById(id);
-    }
+    void deleteEmployee(int id);
 }
