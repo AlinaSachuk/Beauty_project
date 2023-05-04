@@ -1,6 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Procedure;
+import com.beauty_project.domain.dto.CreateUpdateProcedureDto;
 import com.beauty_project.service.ProcedureService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,14 +49,14 @@ public class ProcedureController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createProcedure(@RequestBody Procedure procedure) {
-        procedureService.createProcedure(procedure);
+    public ResponseEntity<HttpStatus> createProcedure(@RequestBody CreateUpdateProcedureDto procedureDto) {
+        procedureService.createProcedure(procedureDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateProcedure(@RequestBody Procedure procedure) {
-        procedureService.updateProcedure(procedure);
+    public void updateProcedure(@RequestBody CreateUpdateProcedureDto procedureDto) {
+        procedureService.updateProcedure(procedureDto);
     }
 
     @DeleteMapping("/{id}")
