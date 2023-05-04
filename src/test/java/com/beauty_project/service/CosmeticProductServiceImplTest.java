@@ -35,7 +35,7 @@ public class CosmeticProductServiceImplTest {
     }
 
     @Test
-    public void testGetAllStatus() {
+    public void testGetAllProducts() {
         when(cosmeticProductRepository.findAll()).thenReturn(allProducts);
         ArrayList<CosmeticProduct> returnedProducts = cosmeticProductService.getAllCosmeticProducts();
         verify(cosmeticProductRepository).findAll();
@@ -43,7 +43,7 @@ public class CosmeticProductServiceImplTest {
     }
 
     @Test
-    public void testDeleteStatusByIdWithEmptyResultDataAccessException() {
+    public void testDeleteProductByIdWithEmptyResultDataAccessException() {
         doThrow(EmptyResultDataAccessException.class).when(cosmeticProductRepository).deleteById(id);
         assertThrows(EmptyResultDataAccessException.class, () -> cosmeticProductService.deleteCosmeticProduct(id));
     }
