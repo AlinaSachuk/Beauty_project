@@ -1,7 +1,6 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Employee;
-import com.beauty_project.domain.Status;
 import com.beauty_project.repository.EmployeeRepository;
 import com.beauty_project.service.impl.EmployeeServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -42,6 +41,7 @@ public class EmployeeServiceImplTest {
         verify(employeeRepository).findAll();
         assertEquals(allEmployees, returnedEmployees);
     }
+
     @Test
     public void testDeleteEmployeeByIdWithEmptyResultDataAccessException() {
         doThrow(EmptyResultDataAccessException.class).when(employeeRepository).deleteById(id);
