@@ -23,7 +23,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/product")
 public class CosmeticProductController {
-    CosmeticProductService cosmeticProductService;
+    private final CosmeticProductService cosmeticProductService;
     private static final Logger log = LoggerFactory.getLogger(CosmeticProductController.class);
 
     @Autowired
