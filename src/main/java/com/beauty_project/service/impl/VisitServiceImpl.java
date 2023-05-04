@@ -2,6 +2,8 @@ package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.Visit;
+import com.beauty_project.domain.dto.CreateVisitDto;
+import com.beauty_project.domain.dto.UpdateVisitDto;
 import com.beauty_project.repository.CustomerRepository;
 import com.beauty_project.repository.StatusRepository;
 import com.beauty_project.repository.VisitRepository;
@@ -40,22 +42,31 @@ public class VisitServiceImpl implements VisitService {
         return (ArrayList<Visit>) visitRepository.findVisitsByCustomerId(id);
     }
 
-    public Visit createVisit(Visit visit, int id) {
+    public Visit createVisit(CreateVisitDto visitDto, int id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Customer by id=" + id + " not found."));
+        Visit visit = new Visit();
+        visit.setDateOfVisit(visitDto.getDateOfVisit());
         visit.setCustomerId(customer.getId());
         if (customer.getStatus() == null) {
-            visit.setFinalPrice(visit.getFinalPrice());
+            visit.setFinalPrice(visitDto.getFinalPrice());
         }
         int discountPercent = statusRepository.findPercentByStatus(customer.getStatus());
-        visit.setFinalPrice(visit.getFinalPrice() * (100 - discountPercent) / 100);
+        visit.setFinalPrice(visitDto.getFinalPrice() * (100 - discountPercent) / 100);
         if (visit.getFinalPrice() == 0 | visit.getFinalPrice() < 0) {
             throw new ArithmeticException("Incorrect price: " + visit.getFinalPrice());
         }
         return visitRepository.save(visit);
     }
 
-    public Visit updateVisit(Visit visit) {
+    public Visit updateVisit(UpdateVisitDto visitDto) {
+        Visit visit = visitRepository.findById(visitDto.getId())
+                .orElseThrow(()-> new NotFoundException("Visit by id=" + visitDto.getId() + " not found"));
+        visit.setDateOfVisit(visitDto.getDateOfVisit());
+        visit.setFinalPrice(visitDto.getFinalPrice());
+        if (visit.getFinalPrice() == 0 | visit.getFinalPrice() < 0) {
+            throw new ArithmeticException("Incorrect price: " + visit.getFinalPrice());
+        }
         return visitRepository.saveAndFlush(visit);
     }
 

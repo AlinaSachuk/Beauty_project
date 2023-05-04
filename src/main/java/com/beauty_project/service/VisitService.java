@@ -1,6 +1,8 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Visit;
+import com.beauty_project.domain.dto.CreateVisitDto;
+import com.beauty_project.domain.dto.UpdateVisitDto;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -12,9 +14,9 @@ public interface VisitService {
 
     ArrayList<Visit> getAllVisitsForSingleCustomer(int id);
 
-    Visit createVisit(Visit visit, int id);
+    Visit createVisit(CreateVisitDto visitDto, int id);
 
-    Visit updateVisit(Visit visit);
+    Visit updateVisit(UpdateVisitDto visitDto);
 
     void deleteVisit(int id);
 }

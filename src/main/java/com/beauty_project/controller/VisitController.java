@@ -1,6 +1,8 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Visit;
+import com.beauty_project.domain.dto.CreateVisitDto;
+import com.beauty_project.domain.dto.UpdateVisitDto;
 import com.beauty_project.service.VisitService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,14 +50,14 @@ public class VisitController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<HttpStatus> createVisit(@RequestBody Visit visit, @PathVariable int id) {
-        visitService.createVisit(visit, id);
+    public ResponseEntity<HttpStatus> createVisit(@RequestBody CreateVisitDto visitDto, @PathVariable int id) {
+        visitService.createVisit(visitDto, id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateVisit(@RequestBody Visit visit) {
-        visitService.updateVisit(visit);
+    public void updateVisit(@RequestBody UpdateVisitDto visitDto) {
+        visitService.updateVisit(visitDto);
     }
 
     @DeleteMapping("/{id}")
