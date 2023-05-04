@@ -11,6 +11,7 @@ import java.sql.Date;
 @Data
 @AllArgsConstructor
 public class RegistrationCustomerDto {
+    private Integer id;
     private String customerName;
     private Date birthDate;
 

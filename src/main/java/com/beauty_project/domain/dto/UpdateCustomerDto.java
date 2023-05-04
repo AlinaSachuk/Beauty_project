@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 public class UpdateCustomerDto {
+    private Integer id;
     private String customerName;
 
     @Pattern(regexp = "[0-9]{11}")

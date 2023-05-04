@@ -2,6 +2,8 @@ package com.beauty_project.controller;
 
 import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.Visit;
+import com.beauty_project.domain.dto.RegistrationCustomerDto;
+import com.beauty_project.domain.dto.UpdateCustomerDto;
 import com.beauty_project.service.CustomerService;
 import com.beauty_project.service.VisitService;
 import org.slf4j.Logger;
@@ -57,14 +59,14 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createCustomer(@RequestBody Customer customer) {
-        customerService.createCustomer(customer);
+    public ResponseEntity<HttpStatus> createCustomer(@RequestBody RegistrationCustomerDto customerDto) {
+        customerService.createCustomer(customerDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateCustomer(@RequestBody Customer customer) {
-        customerService.updateCustomer(customer);
+    public void updateCustomer(@RequestBody UpdateCustomerDto customerDto) {
+        customerService.updateCustomer(customerDto);
     }
 
     @DeleteMapping("/{id}")
