@@ -22,7 +22,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/status")
 public class StatusController {
-    StatusService statusService;
+    private final StatusService statusService;
     private static final Logger log = LoggerFactory.getLogger(StatusController.class);
 
     @Autowired
