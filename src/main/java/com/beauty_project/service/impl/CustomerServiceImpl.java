@@ -1,7 +1,8 @@
-package com.beauty_project.service;
+package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Customer;
 import com.beauty_project.repository.CustomerRepository;
+import com.beauty_project.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
 
     @Autowired

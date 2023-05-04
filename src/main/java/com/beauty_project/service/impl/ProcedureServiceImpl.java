@@ -1,7 +1,8 @@
-package com.beauty_project.service;
+package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Procedure;
 import com.beauty_project.repository.ProcedureRepository;
+import com.beauty_project.service.ProcedureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
-public class ProcedureServiceImpl implements ProcedureService{
+public class ProcedureServiceImpl implements ProcedureService {
     private final ProcedureRepository procedureRepository;
 
     @Autowired

@@ -1,7 +1,8 @@
-package com.beauty_project.service;
+package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Status;
 import com.beauty_project.repository.StatusRepository;
+import com.beauty_project.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
-public class StatusServiceImpl implements StatusService{
+public class StatusServiceImpl implements StatusService {
     private final StatusRepository statusRepository;
 
     @Autowired
