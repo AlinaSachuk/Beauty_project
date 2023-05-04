@@ -22,7 +22,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/procedure")
 public class ProcedureController {
-    ProcedureService procedureService;
+    private final ProcedureService procedureService;
 
     private static final Logger log = LoggerFactory.getLogger(ProcedureController.class);
 

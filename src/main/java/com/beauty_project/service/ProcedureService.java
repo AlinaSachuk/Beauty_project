@@ -1,39 +1,18 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Procedure;
-import com.beauty_project.repository.ProcedureRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-@Service
-public class ProcedureService {
-    ProcedureRepository procedureRepository;
+public interface ProcedureService {
+    Optional<Procedure> getProcedureById(int id);
 
-    @Autowired
-    public ProcedureService(ProcedureRepository procedureRepository) {
-        this.procedureRepository = procedureRepository;
-    }
+    ArrayList<Procedure> getAllProcedures();
 
-    public Optional<Procedure> getProcedureById(int id) {
-        return procedureRepository.findById(id);
-    }
+    Procedure createProcedure(Procedure procedure);
 
-    public ArrayList<Procedure> getAllProcedures() {
-        return (ArrayList<Procedure>) procedureRepository.findAll();
-    }
+    Procedure updateProcedure(Procedure procedure);
 
-    public Procedure createProcedure(Procedure procedure) {
-        return procedureRepository.save(procedure);
-    }
-
-    public Procedure updateProcedure(Procedure procedure) {
-        return procedureRepository.saveAndFlush(procedure);
-    }
-
-    public void deleteProcedure(int id) {
-        procedureRepository.deleteById(id);
-    }
+    public void deleteProcedure(int id);
 }
