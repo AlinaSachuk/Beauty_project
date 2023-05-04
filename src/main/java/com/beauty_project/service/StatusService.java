@@ -1,6 +1,7 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Status;
+import com.beauty_project.domain.dto.CreateUpdateStatusDto;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -10,9 +11,9 @@ public interface StatusService {
 
     ArrayList<Status> getAllStatus();
 
-    Status createStatus(Status status);
+    Status createStatus(CreateUpdateStatusDto statusDto);
 
-    Status updateStatus(Status status);
+    Status updateStatus(CreateUpdateStatusDto statusDto);
 
     void deleteStatus(int id);
 }

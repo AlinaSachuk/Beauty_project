@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CreateUpdateStatusDto {
+    private int id;
     private String status;
     private int percent;
 }

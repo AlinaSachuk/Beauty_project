@@ -1,6 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Status;
+import com.beauty_project.domain.dto.CreateUpdateStatusDto;
 import com.beauty_project.service.StatusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,14 +51,14 @@ public class StatusController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createStatus(@RequestBody Status status) {
-        statusService.createStatus(status);
+    public ResponseEntity<HttpStatus> createStatus(@RequestBody CreateUpdateStatusDto statusDto) {
+        statusService.createStatus(statusDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateStatus(@RequestBody Status status) {
-        statusService.updateStatus(status);
+    public void updateStatus(@RequestBody CreateUpdateStatusDto statusDto) {
+        statusService.updateStatus(statusDto);
     }
 
     @DeleteMapping("/{id}")
