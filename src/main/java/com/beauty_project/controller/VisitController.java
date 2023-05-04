@@ -22,7 +22,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/visit")
 public class VisitController {
-    VisitService visitService;
+    private final VisitService visitService;
 
     private static final Logger log = LoggerFactory.getLogger(VisitController.class);
 
