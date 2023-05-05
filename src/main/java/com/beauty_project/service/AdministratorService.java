@@ -4,8 +4,6 @@ import com.beauty_project.domain.Administrator;
 import com.beauty_project.domain.dto.RegistrationAdminDto;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.Optional;
-
 public interface AdministratorService {
     Administrator getAdminByLogin(@PathVariable String login);
 
