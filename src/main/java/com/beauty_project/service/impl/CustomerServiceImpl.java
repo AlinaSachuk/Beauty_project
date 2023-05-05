@@ -10,8 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -25,12 +24,13 @@ public class CustomerServiceImpl implements CustomerService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Optional<Customer> getCustomerById(int id) {
-        return customerRepository.findById(id);
+    public Customer getCustomerById(int id) {
+        return customerRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("Customer by id=" + id + " not found"));
     }
 
-    public ArrayList<Customer> getAllCustomers() {
-        return (ArrayList<Customer>) customerRepository.findAll();
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
     }
 
     public Customer createCustomer(RegistrationCustomerDto customerDto) {

@@ -4,13 +4,12 @@ import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.dto.RegistrationCustomerDto;
 import com.beauty_project.domain.dto.UpdateCustomerDto;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 public interface CustomerService {
-    Optional<Customer> getCustomerById(int id);
+    Customer getCustomerById(int id);
 
-    ArrayList<Customer> getAllCustomers();
+    List<Customer> getAllCustomers();
 
     Customer createCustomer(RegistrationCustomerDto customerDto);
 
