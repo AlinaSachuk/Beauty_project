@@ -3,8 +3,6 @@ package com.beauty_project.controller;
 import com.beauty_project.domain.Procedure;
 import com.beauty_project.domain.dto.CreateUpdateProcedureDto;
 import com.beauty_project.service.ProcedureService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/procedure")
 public class ProcedureController {
     private final ProcedureService procedureService;
-
-    private static final Logger log = LoggerFactory.getLogger(ProcedureController.class);
 
     @Autowired
     public ProcedureController(ProcedureService procedureService) {
@@ -33,19 +28,15 @@ public class ProcedureController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Procedure>> getProcedureById(@PathVariable int id) {
-        Optional<Procedure> procedure = procedureService.getProcedureById(id);
-        if (procedure.isEmpty()) {
-            log.warn("Procedure with id=" + id + " not found.");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Procedure> getProcedureById(@PathVariable int id) {
+        Procedure procedure = procedureService.getProcedureById(id);
         return new ResponseEntity<>(procedure, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<ArrayList<Procedure>> getAllProcedures() {
-        ArrayList<Procedure> procedureArrayList = procedureService.getAllProcedures();
-        return new ResponseEntity<>(procedureArrayList, (!procedureArrayList.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    public ResponseEntity<List<Procedure>> getAllProcedures() {
+        List<Procedure> procedureList = procedureService.getAllProcedures();
+        return new ResponseEntity<>(procedureList, (!procedureList.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @PostMapping

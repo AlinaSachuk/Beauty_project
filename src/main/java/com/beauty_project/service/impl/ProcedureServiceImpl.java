@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class ProcedureServiceImpl implements ProcedureService {
@@ -20,12 +19,13 @@ public class ProcedureServiceImpl implements ProcedureService {
         this.procedureRepository = procedureRepository;
     }
 
-    public Optional<Procedure> getProcedureById(int id) {
-        return procedureRepository.findById(id);
+    public Procedure getProcedureById(int id) {
+        return procedureRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("Procedure by id=" + id + " not found"));
     }
 
-    public ArrayList<Procedure> getAllProcedures() {
-        return (ArrayList<Procedure>) procedureRepository.findAll();
+    public List<Procedure> getAllProcedures() {
+        return procedureRepository.findAll();
     }
 
     public Procedure createProcedure(CreateUpdateProcedureDto procedureDto) {

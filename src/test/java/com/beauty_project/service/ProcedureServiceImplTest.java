@@ -11,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.webjars.NotFoundException;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -27,7 +27,7 @@ public class ProcedureServiceImplTest {
     private ProcedureServiceImpl procedureService;
     private int id;
     private Procedure procedure;
-    private ArrayList<Procedure> allProcedures;
+    private List<Procedure> allProcedures;
 
     @Test
     public void testGetByIdWithNotFoundException() {
@@ -38,7 +38,7 @@ public class ProcedureServiceImplTest {
     @Test
     public void testGetAllProcedures() {
         when(procedureRepository.findAll()).thenReturn(allProcedures);
-        ArrayList<Procedure> returnedProcedures = procedureService.getAllProcedures();
+        List<Procedure> returnedProcedures = procedureService.getAllProcedures();
         verify(procedureRepository).findAll();
         assertEquals(allProcedures, returnedProcedures);
     }
