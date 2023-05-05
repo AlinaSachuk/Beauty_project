@@ -4,8 +4,6 @@ import com.beauty_project.domain.Visit;
 import com.beauty_project.domain.dto.CreateVisitDto;
 import com.beauty_project.domain.dto.UpdateVisitDto;
 import com.beauty_project.service.VisitService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/visit")
 public class VisitController {
     private final VisitService visitService;
-
-    private static final Logger log = LoggerFactory.getLogger(VisitController.class);
 
     @Autowired
     public VisitController(VisitService visitService) {
@@ -34,18 +29,14 @@ public class VisitController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Visit>> getVisitById(@PathVariable int id) {
-        Optional<Visit> visit = visitService.getVisitById(id);
-        if (visit.isEmpty()) {
-            log.warn("Visit with id=" + id + " not found.");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Visit> getVisitById(@PathVariable int id) {
+        Visit visit = visitService.getVisitById(id);
         return new ResponseEntity<>(visit, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<ArrayList<Visit>> getAllVisits() {
-        ArrayList<Visit> list = visitService.getAllVisits();
+    public ResponseEntity<List<Visit>> getAllVisits() {
+        List<Visit> list = visitService.getAllVisits();
         return new ResponseEntity<>(list, !list.isEmpty() ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 

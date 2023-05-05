@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class VisitServiceImpl implements VisitService {
@@ -28,18 +27,19 @@ public class VisitServiceImpl implements VisitService {
         this.statusRepository = statusRepository;
     }
 
-    public Optional<Visit> getVisitById(int id) {
-        return visitRepository.findById(id);
+    public Visit getVisitById(int id) {
+        return visitRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Visit by id=" + id + " not found."));
     }
 
-    public ArrayList<Visit> getAllVisits() {
-        return (ArrayList<Visit>) visitRepository.findAll();
+    public List<Visit> getAllVisits() {
+        return visitRepository.findAll();
     }
 
-    public ArrayList<Visit> getAllVisitsForSingleCustomer(int id) {
+    public List<Visit> getAllVisitsForSingleCustomer(int id) {
         customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Customer by id=" + id + " not found."));
-        return (ArrayList<Visit>) visitRepository.findVisitsByCustomerId(id);
+        return visitRepository.findVisitsByCustomerId(id);
     }
 
     public Visit createVisit(CreateVisitDto visitDto, int id) {

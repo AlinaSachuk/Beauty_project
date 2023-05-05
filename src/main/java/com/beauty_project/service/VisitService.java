@@ -4,15 +4,14 @@ import com.beauty_project.domain.Visit;
 import com.beauty_project.domain.dto.CreateVisitDto;
 import com.beauty_project.domain.dto.UpdateVisitDto;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 public interface VisitService {
-    Optional<Visit> getVisitById(int id);
+    Visit getVisitById(int id);
 
-    ArrayList<Visit> getAllVisits();
+    List<Visit> getAllVisits();
 
-    ArrayList<Visit> getAllVisitsForSingleCustomer(int id);
+    List<Visit> getAllVisitsForSingleCustomer(int id);
 
     Visit createVisit(CreateVisitDto visitDto, int id);
 
