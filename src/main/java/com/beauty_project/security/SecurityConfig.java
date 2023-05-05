@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/status/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/employee/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/visit/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/admin/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN")
