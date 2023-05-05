@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class StatusServiceImpl implements StatusService {
@@ -20,12 +19,13 @@ public class StatusServiceImpl implements StatusService {
         this.statusRepository = statusRepository;
     }
 
-    public Optional<Status> getStatusById(int id) {
-        return statusRepository.findById(id);
+    public Status getStatusById(int id) {
+        return statusRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("Status by id=" + id + " not found"));
     }
 
-    public ArrayList<Status> getAllStatus() {
-        return (ArrayList<Status>) statusRepository.findAll();
+    public List<Status> getAllStatus() {
+        return statusRepository.findAll();
     }
 
     public Status createStatus(CreateUpdateStatusDto statusDto) {

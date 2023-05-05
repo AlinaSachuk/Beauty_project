@@ -3,13 +3,12 @@ package com.beauty_project.service;
 import com.beauty_project.domain.Status;
 import com.beauty_project.domain.dto.CreateUpdateStatusDto;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 public interface StatusService {
-    Optional<Status> getStatusById(int id);
+    Status getStatusById(int id);
 
-    ArrayList<Status> getAllStatus();
+    List<Status> getAllStatus();
 
     Status createStatus(CreateUpdateStatusDto statusDto);
 

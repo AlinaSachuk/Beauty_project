@@ -3,8 +3,6 @@ package com.beauty_project.controller;
 import com.beauty_project.domain.Status;
 import com.beauty_project.domain.dto.CreateUpdateStatusDto;
 import com.beauty_project.service.StatusService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/status")
 public class StatusController {
     private final StatusService statusService;
-    private static final Logger log = LoggerFactory.getLogger(StatusController.class);
 
     @Autowired
     public StatusController(StatusService statusService) {
@@ -32,18 +28,14 @@ public class StatusController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Status>> getStatusById(@PathVariable int id) {
-        Optional<Status> status = statusService.getStatusById(id);
-        if (status.isEmpty()) {
-            log.warn("Status with id=" + id + " not found.");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Status> getStatusById(@PathVariable int id) {
+        Status status = statusService.getStatusById(id);
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<ArrayList<Status>> getAllStatus() {
-        ArrayList<Status> list = statusService.getAllStatus();
+    public ResponseEntity<List<Status>> getAllStatus() {
+        List<Status> list = statusService.getAllStatus();
         if (list.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

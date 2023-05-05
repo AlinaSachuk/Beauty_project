@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.webjars.NotFoundException;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,7 +29,7 @@ public class StatusServiceImplTest {
     private int id;
     private Status status;
     private CreateUpdateStatusDto statusDto;
-    private ArrayList<Status> allStatus;
+    private List<Status> allStatus;
 
     @Test
     public void testGetByIdWithNotFoundException() {
@@ -40,7 +40,7 @@ public class StatusServiceImplTest {
     @Test
     public void testGetAllStatus() {
         when(statusRepository.findAll()).thenReturn(allStatus);
-        ArrayList<Status> returnedStatus = statusService.getAllStatus();
+        List<Status> returnedStatus = statusService.getAllStatus();
         verify(statusRepository).findAll();
         assertEquals(allStatus, returnedStatus);
     }
