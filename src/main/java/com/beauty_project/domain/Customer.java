@@ -47,4 +47,7 @@ public class Customer {
     @Size(min = 5)
     @Column(name = "password")
     private String password;
+
+    @Column(name = "role")
+    private String role;
 }

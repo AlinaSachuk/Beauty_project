@@ -6,6 +6,7 @@ import com.beauty_project.domain.dto.UpdateCustomerDto;
 import com.beauty_project.repository.CustomerRepository;
 import com.beauty_project.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -15,10 +16,13 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
+    private final String CUSTOMER_ROLE = "USER";
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
         this.customerRepository = customerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Optional<Customer> getCustomerById(int id) {
@@ -35,7 +39,8 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setTelephoneNumber(customerDto.getTelephoneNumber());
         customer.setEmail(customerDto.getEmail());
         customer.setInstagramAccount(customerDto.getInstagramAccount());
-        customer.setPassword(customerDto.getPassword());
+        customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
+        customer.setRole(CUSTOMER_ROLE);
         return customerRepository.save(customer);
     }
 

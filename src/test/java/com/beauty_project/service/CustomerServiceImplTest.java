@@ -13,8 +13,7 @@ import org.webjars.NotFoundException;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -42,6 +41,7 @@ public class CustomerServiceImplTest {
         verify(customerRepository).findAll();
         assertEquals(allCustomers, returnedCustomers);
     }
+
     @Test
     public void testDeleteCustomerByIdWithEmptyResultDataAccessException() {
         doThrow(EmptyResultDataAccessException.class).when(customerRepository).deleteById(id);
