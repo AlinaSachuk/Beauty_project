@@ -3,8 +3,6 @@ package com.beauty_project.controller;
 import com.beauty_project.domain.CosmeticProduct;
 import com.beauty_project.domain.dto.CreateUpdateCosmeticProductDto;
 import com.beauty_project.service.CosmeticProductService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/product")
 public class CosmeticProductController {
     private final CosmeticProductService cosmeticProductService;
-    private static final Logger log = LoggerFactory.getLogger(CosmeticProductController.class);
 
     @Autowired
     public CosmeticProductController(CosmeticProductService cosmeticProductService) {
@@ -33,18 +28,14 @@ public class CosmeticProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<CosmeticProduct>> getCosmeticProductById(@PathVariable int id) {
-        Optional<CosmeticProduct> product = cosmeticProductService.getCosmeticProductById(id);
-        if (product.isEmpty()) {
-            log.warn("CosmeticProduct with id=" + id + " not found.");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<CosmeticProduct> getCosmeticProductById(@PathVariable int id) {
+        CosmeticProduct product = cosmeticProductService.getCosmeticProductById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<AbstractList<CosmeticProduct>> getAllCosmeticProducts() {
-        ArrayList<CosmeticProduct> list = cosmeticProductService.getAllCosmeticProducts();
+    public ResponseEntity<List<CosmeticProduct>> getAllCosmeticProducts() {
+        List<CosmeticProduct> list = cosmeticProductService.getAllCosmeticProducts();
         return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 

@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class CosmeticProductServiceImpl implements CosmeticProductService {
@@ -20,12 +19,13 @@ public class CosmeticProductServiceImpl implements CosmeticProductService {
         this.cosmeticProductRepository = cosmeticProductRepository;
     }
 
-    public Optional<CosmeticProduct> getCosmeticProductById(int id) {
-        return cosmeticProductRepository.findById(id);
+    public CosmeticProduct getCosmeticProductById(int id) {
+        return cosmeticProductRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("Product by id=" + id + " not found"));
     }
 
-    public ArrayList<CosmeticProduct> getAllCosmeticProducts() {
-        ArrayList<CosmeticProduct> list = (ArrayList<CosmeticProduct>) cosmeticProductRepository.findAll();
+    public List<CosmeticProduct> getAllCosmeticProducts() {
+        List<CosmeticProduct> list = cosmeticProductRepository.findAll();
         return list;
     }
 

@@ -11,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.webjars.NotFoundException;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -26,7 +26,7 @@ public class CosmeticProductServiceImplTest {
     private CosmeticProductServiceImpl cosmeticProductService;
     private int id;
     private CosmeticProduct product;
-    private ArrayList<CosmeticProduct> allProducts;
+    private List<CosmeticProduct> allProducts;
 
     @Test
     public void testGetByIdWithNotFoundException() {
@@ -37,7 +37,7 @@ public class CosmeticProductServiceImplTest {
     @Test
     public void testGetAllProducts() {
         when(cosmeticProductRepository.findAll()).thenReturn(allProducts);
-        ArrayList<CosmeticProduct> returnedProducts = cosmeticProductService.getAllCosmeticProducts();
+        List<CosmeticProduct> returnedProducts = cosmeticProductService.getAllCosmeticProducts();
         verify(cosmeticProductRepository).findAll();
         assertEquals(allProducts, returnedProducts);
     }
