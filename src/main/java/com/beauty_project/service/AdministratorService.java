@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Optional;
 
 public interface AdministratorService {
-    Optional<Administrator> getAdminByLogin(@PathVariable String login);
+    Administrator getAdminByLogin(@PathVariable String login);
 
     Administrator adminRegistration(RegistrationAdminDto registrationAdminDto);
 

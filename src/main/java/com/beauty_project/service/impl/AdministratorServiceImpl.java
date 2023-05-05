@@ -7,8 +7,7 @@ import com.beauty_project.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
+import org.webjars.NotFoundException;
 
 @Service
 public class AdministratorServiceImpl implements AdministratorService {
@@ -23,8 +22,9 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
-    public Optional<Administrator> getAdminByLogin(String login) {
-        return administratorRepository.findAdministratorByLogin(login);
+    public Administrator getAdminByLogin(String login) {
+        return administratorRepository.findAdministratorByLogin(login)
+                .orElseThrow(()-> new NotFoundException("Administrator by login=" + login + " not found"));
     }
 
     @Override
