@@ -3,13 +3,12 @@ package com.beauty_project.service;
 import com.beauty_project.domain.Employee;
 import com.beauty_project.domain.dto.CreateUpdateEmployeeDto;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 public interface EmployeeService {
-    Optional<Employee> getEmployeeById(int id);
+    Employee getEmployeeById(int id);
 
-    ArrayList<Employee> getAllEmployees();
+    List<Employee> getAllEmployees();
 
     Employee createEmployee(CreateUpdateEmployeeDto employeeDto);
 

@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -20,12 +19,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public Optional<Employee> getEmployeeById(int id) {
-        return employeeRepository.findById(id);
+    public Employee getEmployeeById(int id) {
+        return employeeRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("Employee by id=" + id + " not found"));
     }
 
-    public ArrayList<Employee> getAllEmployees() {
-        return (ArrayList<Employee>) employeeRepository.findAll();
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
     }
 
     public Employee createEmployee(CreateUpdateEmployeeDto employeeDto) {

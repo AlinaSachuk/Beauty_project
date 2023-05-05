@@ -3,8 +3,6 @@ package com.beauty_project.controller;
 import com.beauty_project.domain.Employee;
 import com.beauty_project.domain.dto.CreateUpdateEmployeeDto;
 import com.beauty_project.service.EmployeeService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-    private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
     @Autowired
     public EmployeeController(EmployeeService employeeService) {
@@ -33,18 +29,14 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Employee>> getEmployeeById(@PathVariable int id) {
-        Optional<Employee> employee = employeeService.getEmployeeById(id);
-        if (employee.isEmpty()) {
-            log.warn("Employee with id=" + id + " not found.");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable int id) {
+        Employee employee = employeeService.getEmployeeById(id);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<ArrayList<Employee>> getAllEmployees() {
-        ArrayList<Employee> list = employeeService.getAllEmployees();
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        List<Employee> list = employeeService.getAllEmployees();
         return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 

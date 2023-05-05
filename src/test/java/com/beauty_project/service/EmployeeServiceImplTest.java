@@ -11,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.webjars.NotFoundException;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -27,7 +27,7 @@ public class EmployeeServiceImplTest {
     private EmployeeServiceImpl employeeService;
     private int id;
     private Employee employee;
-    private ArrayList<Employee> allEmployees;
+    private List<Employee> allEmployees;
 
     @Test
     public void testGetByIdWithNotFoundException() {
@@ -38,7 +38,7 @@ public class EmployeeServiceImplTest {
     @Test
     public void testGetAllEmployees() {
         when(employeeRepository.findAll()).thenReturn(allEmployees);
-        ArrayList<Employee> returnedEmployees = employeeService.getAllEmployees();
+        List<Employee> returnedEmployees = employeeService.getAllEmployees();
         verify(employeeRepository).findAll();
         assertEquals(allEmployees, returnedEmployees);
     }
