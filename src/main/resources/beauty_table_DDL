@@ -76,9 +76,9 @@ create table public.customer_table
 (
     id                bigserial
         primary key,
-    name              varchar not null,
-    birth_date        date    not null,
-    telephone_number  varchar not null
+    name              varchar                                   not null,
+    birth_date        date                                      not null,
+    telephone_number  varchar                                   not null
         unique,
     email             varchar,
     instagram_account varchar
@@ -86,7 +86,8 @@ create table public.customer_table
     status            varchar
         constraint customer_table_status_fk
             references public.status_table (status),
-    password          varchar not null
+    password          varchar                                   not null,
+    role              varchar default 'USER'::character varying not null
 );
 
 alter table public.customer_table
@@ -106,4 +107,17 @@ create table public.visit_table
 );
 
 alter table public.visit_table
+    owner to postgres;
+
+create table public.admin_table
+(
+    id       serial
+        primary key,
+    login    varchar                                    not null
+        unique,
+    password varchar                                    not null,
+    role     varchar default 'ADMIN'::character varying not null
+);
+
+alter table public.admin_table
     owner to postgres;
