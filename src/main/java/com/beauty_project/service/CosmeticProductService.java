@@ -1,18 +1,18 @@
 package com.beauty_project.service;
 
-import com.beauty_project.domain.CosmeticProduct;
 import com.beauty_project.domain.request.CosmeticProductRequestDto;
+import com.beauty_project.domain.response.CosmeticProductResponseDto;
 
 import java.util.List;
 
 public interface CosmeticProductService {
-    CosmeticProduct getCosmeticProductById(int id);
+    CosmeticProductResponseDto getCosmeticProductById(int id);
 
-    List<CosmeticProduct> getAllCosmeticProducts();
+    List<CosmeticProductResponseDto> getAllCosmeticProducts();
 
-    CosmeticProduct createCosmeticProduct(CosmeticProductRequestDto productDto);
+    CosmeticProductResponseDto createCosmeticProduct(CosmeticProductRequestDto productDto);
 
-    CosmeticProduct updateCosmeticProduct(CosmeticProductRequestDto productDto);
+    CosmeticProductResponseDto updateCosmeticProduct(CosmeticProductRequestDto productDto);
 
     void deleteCosmeticProduct(int id);
 }

@@ -1,8 +1,8 @@
 package com.beauty_project.domain.response;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 
-@Data
+@AllArgsConstructor
 public class CosmeticProductResponseDto {
     private int id;
     private String productName;
