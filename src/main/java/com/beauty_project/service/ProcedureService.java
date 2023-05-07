@@ -1,18 +1,18 @@
 package com.beauty_project.service;
 
-import com.beauty_project.domain.Procedure;
 import com.beauty_project.domain.request.ProcedureRequestDto;
+import com.beauty_project.domain.response.ProcedureResponseDto;
 
 import java.util.List;
 
 public interface ProcedureService {
-    Procedure getProcedureById(int id);
+    ProcedureResponseDto getProcedureById(int id);
 
-    List<Procedure> getAllProcedures();
+    List<ProcedureResponseDto> getAllProcedures();
 
-    Procedure createProcedure(ProcedureRequestDto procedureDto);
+    ProcedureResponseDto createProcedure(ProcedureRequestDto procedureDto);
 
-    Procedure updateProcedure(ProcedureRequestDto procedureDto);
+    ProcedureResponseDto updateProcedure(ProcedureRequestDto procedureDto);
 
     void deleteProcedure(int id);
 }

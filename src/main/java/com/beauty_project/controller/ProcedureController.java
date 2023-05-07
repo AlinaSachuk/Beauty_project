@@ -1,11 +1,10 @@
 package com.beauty_project.controller;
 
-import com.beauty_project.domain.Procedure;
 import com.beauty_project.domain.request.ProcedureRequestDto;
+import com.beauty_project.domain.response.ProcedureResponseDto;
 import com.beauty_project.service.ProcedureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -28,31 +28,32 @@ public class ProcedureController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Procedure> getProcedureById(@PathVariable int id) {
-        Procedure procedure = procedureService.getProcedureById(id);
-        return new ResponseEntity<>(procedure, HttpStatus.OK);
+    @ResponseStatus(HttpStatus.OK)
+    public ProcedureResponseDto getProcedureById(@PathVariable int id) {
+        return procedureService.getProcedureById(id);
     }
 
     @GetMapping
-    public ResponseEntity<List<Procedure>> getAllProcedures() {
-        List<Procedure> procedureList = procedureService.getAllProcedures();
-        return new ResponseEntity<>(procedureList, (!procedureList.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProcedureResponseDto> getAllProcedures() {
+        return procedureService.getAllProcedures();
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createProcedure(@RequestBody ProcedureRequestDto procedureDto) {
-        procedureService.createProcedure(procedureDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProcedureResponseDto createProcedure(@RequestBody ProcedureRequestDto procedureDto) {
+        return procedureService.createProcedure(procedureDto);
     }
 
     @PutMapping
-    public void updateProcedure(@RequestBody ProcedureRequestDto procedureDto) {
-        procedureService.updateProcedure(procedureDto);
+    @ResponseStatus(HttpStatus.OK)
+    public ProcedureResponseDto updateProcedure(@RequestBody ProcedureRequestDto procedureDto) {
+        return procedureService.updateProcedure(procedureDto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteProcedure(@PathVariable int id) {
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteProcedure(@PathVariable int id) {
         procedureService.deleteProcedure(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
