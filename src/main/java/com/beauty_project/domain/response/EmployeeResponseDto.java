@@ -1,11 +1,9 @@
-package com.beauty_project.domain.request;
+package com.beauty_project.domain.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
-public class CreateUpdateEmployeeDto {
+public class EmployeeResponseDto {
     private Integer id;
     private String employeeName;
     private String position;

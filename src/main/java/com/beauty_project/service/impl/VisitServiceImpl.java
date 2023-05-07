@@ -2,8 +2,7 @@ package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.Visit;
-import com.beauty_project.domain.request.CreateVisitDto;
-import com.beauty_project.domain.request.UpdateVisitDto;
+import com.beauty_project.domain.request.VisitRequestDto;
 import com.beauty_project.repository.CustomerRepository;
 import com.beauty_project.repository.StatusRepository;
 import com.beauty_project.repository.VisitRepository;
@@ -42,7 +41,7 @@ public class VisitServiceImpl implements VisitService {
         return visitRepository.findVisitsByCustomerId(id);
     }
 
-    public Visit createVisit(CreateVisitDto visitDto, int id) {
+    public Visit createVisit(VisitRequestDto visitDto, int id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Customer by id=" + id + " not found."));
         Visit visit = new Visit();
@@ -59,7 +58,7 @@ public class VisitServiceImpl implements VisitService {
         return visitRepository.save(visit);
     }
 
-    public Visit updateVisit(UpdateVisitDto visitDto) {
+    public Visit updateVisit(VisitUpdateRequestDto visitDto) {
         Visit visit = visitRepository.findById(visitDto.getId())
                 .orElseThrow(()-> new NotFoundException("Visit by id=" + visitDto.getId() + " not found"));
         visit.setDateOfVisit(visitDto.getDateOfVisit());

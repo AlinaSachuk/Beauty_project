@@ -1,8 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Visit;
-import com.beauty_project.domain.request.CreateVisitDto;
-import com.beauty_project.domain.request.UpdateVisitDto;
+import com.beauty_project.domain.request.VisitRequestDto;
 import com.beauty_project.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,13 +40,13 @@ public class VisitController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<HttpStatus> createVisit(@RequestBody CreateVisitDto visitDto, @PathVariable int id) {
+    public ResponseEntity<HttpStatus> createVisit(@RequestBody VisitRequestDto visitDto, @PathVariable int id) {
         visitService.createVisit(visitDto, id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateVisit(@RequestBody UpdateVisitDto visitDto) {
+    public void updateVisit(@RequestBody VisitUpdateRequestDto visitDto) {
         visitService.updateVisit(visitDto);
     }
 

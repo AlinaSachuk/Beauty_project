@@ -1,7 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Procedure;
-import com.beauty_project.domain.request.CreateUpdateProcedureDto;
+import com.beauty_project.domain.request.ProcedureRequestDto;
 import com.beauty_project.service.ProcedureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,13 +40,13 @@ public class ProcedureController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createProcedure(@RequestBody CreateUpdateProcedureDto procedureDto) {
+    public ResponseEntity<HttpStatus> createProcedure(@RequestBody ProcedureRequestDto procedureDto) {
         procedureService.createProcedure(procedureDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateProcedure(@RequestBody CreateUpdateProcedureDto procedureDto) {
+    public void updateProcedure(@RequestBody ProcedureRequestDto procedureDto) {
         procedureService.updateProcedure(procedureDto);
     }
 

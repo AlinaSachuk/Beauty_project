@@ -1,7 +1,7 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Procedure;
-import com.beauty_project.domain.request.CreateUpdateProcedureDto;
+import com.beauty_project.domain.request.ProcedureRequestDto;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ public interface ProcedureService {
 
     List<Procedure> getAllProcedures();
 
-    Procedure createProcedure(CreateUpdateProcedureDto procedureDto);
+    Procedure createProcedure(ProcedureRequestDto procedureDto);
 
-    Procedure updateProcedure(CreateUpdateProcedureDto procedureDto);
+    Procedure updateProcedure(ProcedureRequestDto procedureDto);
 
     void deleteProcedure(int id);
 }

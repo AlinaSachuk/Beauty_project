@@ -1,7 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Employee;
-import com.beauty_project.domain.request.CreateUpdateEmployeeDto;
+import com.beauty_project.domain.request.EmployeeRequestDto;
 import com.beauty_project.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,13 +41,13 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createEmployee(@RequestBody CreateUpdateEmployeeDto employeeDto) {
+    public ResponseEntity<HttpStatus> createEmployee(@RequestBody EmployeeRequestDto employeeDto) {
         employeeService.createEmployee(employeeDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateEmployee(@RequestBody CreateUpdateEmployeeDto employeeDto) {
+    public void updateEmployee(@RequestBody EmployeeRequestDto employeeDto) {
         employeeService.updateEmployee(employeeDto);
     }
 

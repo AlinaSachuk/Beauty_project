@@ -1,7 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.CosmeticProduct;
-import com.beauty_project.domain.request.CreateUpdateCosmeticProductDto;
+import com.beauty_project.domain.request.CosmeticProductRequestDto;
 import com.beauty_project.service.CosmeticProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,13 +40,13 @@ public class CosmeticProductController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createCosmeticProduct(@RequestBody CreateUpdateCosmeticProductDto productDto) {
+    public ResponseEntity<HttpStatus> createCosmeticProduct(@RequestBody CosmeticProductRequestDto productDto) {
         cosmeticProductService.createCosmeticProduct(productDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateCosmeticProduct(@RequestBody CreateUpdateCosmeticProductDto productDto) {
+    public void updateCosmeticProduct(@RequestBody CosmeticProductRequestDto productDto) {
         cosmeticProductService.updateCosmeticProduct(productDto);
     }
 

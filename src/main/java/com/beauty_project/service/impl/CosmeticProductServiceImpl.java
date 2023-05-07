@@ -1,7 +1,7 @@
 package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.CosmeticProduct;
-import com.beauty_project.domain.request.CreateUpdateCosmeticProductDto;
+import com.beauty_project.domain.request.CosmeticProductRequestDto;
 import com.beauty_project.repository.CosmeticProductRepository;
 import com.beauty_project.service.CosmeticProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class CosmeticProductServiceImpl implements CosmeticProductService {
         return list;
     }
 
-    public CosmeticProduct createCosmeticProduct(CreateUpdateCosmeticProductDto productDto) {
+    public CosmeticProduct createCosmeticProduct(CosmeticProductRequestDto productDto) {
         CosmeticProduct product = new CosmeticProduct();
         product.setProductName(productDto.getProductName());
         product.setManufacture(productDto.getManufacture());
@@ -37,7 +37,7 @@ public class CosmeticProductServiceImpl implements CosmeticProductService {
         return cosmeticProductRepository.save(product);
     }
 
-    public CosmeticProduct updateCosmeticProduct(CreateUpdateCosmeticProductDto productDto) {
+    public CosmeticProduct updateCosmeticProduct(CosmeticProductRequestDto productDto) {
         CosmeticProduct product = cosmeticProductRepository.findById(productDto.getId())
                 .orElseThrow(()-> new NotFoundException("Product by id=" + productDto.getId() + " not found"));
         product.setProductName(productDto.getProductName());

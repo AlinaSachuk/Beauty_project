@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
-public class UpdateCustomerDto {
+public class CustomerUpdateRequestDto {
     private Integer id;
     private String customerName;
 

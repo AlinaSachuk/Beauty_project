@@ -1,7 +1,7 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Employee;
-import com.beauty_project.domain.request.CreateUpdateEmployeeDto;
+import com.beauty_project.domain.request.EmployeeRequestDto;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ public interface EmployeeService {
 
     List<Employee> getAllEmployees();
 
-    Employee createEmployee(CreateUpdateEmployeeDto employeeDto);
+    Employee createEmployee(EmployeeRequestDto employeeDto);
 
-    Employee updateEmployee(CreateUpdateEmployeeDto employeeDto);
+    Employee updateEmployee(EmployeeRequestDto employeeDto);
 
     void deleteEmployee(int id);
 }

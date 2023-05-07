@@ -1,7 +1,7 @@
 package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Employee;
-import com.beauty_project.domain.request.CreateUpdateEmployeeDto;
+import com.beauty_project.domain.request.EmployeeRequestDto;
 import com.beauty_project.repository.EmployeeRepository;
 import com.beauty_project.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee createEmployee(CreateUpdateEmployeeDto employeeDto) {
+    public Employee createEmployee(EmployeeRequestDto employeeDto) {
         Employee employee = new Employee();
         employee.setEmployeeName(employee.getEmployeeName());
         employee.setPosition(employee.getPosition());
@@ -37,7 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Employee updateEmployee(CreateUpdateEmployeeDto employeeDto) {
+    public Employee updateEmployee(EmployeeRequestDto employeeDto) {
         Employee employee = employeeRepository.findById(employeeDto.getId())
                 .orElseThrow(()-> new NotFoundException("Employee by id=" + employeeDto.getId() + " not found"));
         employee.setEmployeeName(employee.getEmployeeName());

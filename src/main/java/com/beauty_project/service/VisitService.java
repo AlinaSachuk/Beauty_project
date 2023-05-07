@@ -1,8 +1,7 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Visit;
-import com.beauty_project.domain.request.CreateVisitDto;
-import com.beauty_project.domain.request.UpdateVisitDto;
+import com.beauty_project.domain.request.VisitRequestDto;
 
 import java.util.List;
 
@@ -13,9 +12,9 @@ public interface VisitService {
 
     List<Visit> getAllVisitsForSingleCustomer(int id);
 
-    Visit createVisit(CreateVisitDto visitDto, int id);
+    Visit createVisit(VisitRequestDto visitDto, int id);
 
-    Visit updateVisit(UpdateVisitDto visitDto);
+    Visit updateVisit(VisitUpdateRequestDto visitDto);
 
     void deleteVisit(int id);
 }

@@ -1,7 +1,7 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.CosmeticProduct;
-import com.beauty_project.domain.request.CreateUpdateCosmeticProductDto;
+import com.beauty_project.domain.request.CosmeticProductRequestDto;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ public interface CosmeticProductService {
 
     List<CosmeticProduct> getAllCosmeticProducts();
 
-    CosmeticProduct createCosmeticProduct(CreateUpdateCosmeticProductDto productDto);
+    CosmeticProduct createCosmeticProduct(CosmeticProductRequestDto productDto);
 
-    CosmeticProduct updateCosmeticProduct(CreateUpdateCosmeticProductDto productDto);
+    CosmeticProduct updateCosmeticProduct(CosmeticProductRequestDto productDto);
 
     void deleteCosmeticProduct(int id);
 }

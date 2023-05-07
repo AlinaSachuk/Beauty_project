@@ -1,7 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Status;
-import com.beauty_project.domain.request.CreateUpdateStatusDto;
+import com.beauty_project.domain.request.StatusRequestDto;
 import com.beauty_project.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,13 +43,13 @@ public class StatusController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createStatus(@RequestBody CreateUpdateStatusDto statusDto) {
+    public ResponseEntity<HttpStatus> createStatus(@RequestBody StatusRequestDto statusDto) {
         statusService.createStatus(statusDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void updateStatus(@RequestBody CreateUpdateStatusDto statusDto) {
+    public void updateStatus(@RequestBody StatusRequestDto statusDto) {
         statusService.updateStatus(statusDto);
     }
 

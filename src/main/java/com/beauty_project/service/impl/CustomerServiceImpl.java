@@ -2,7 +2,7 @@ package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.request.RegistrationCustomerDto;
-import com.beauty_project.domain.request.UpdateCustomerDto;
+import com.beauty_project.domain.request.CustomerUpdateRequestDto;
 import com.beauty_project.repository.CustomerRepository;
 import com.beauty_project.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Customer updateCustomer(UpdateCustomerDto customerDto) {
+    public Customer updateCustomer(CustomerUpdateRequestDto customerDto) {
         Customer customer = customerRepository.findById(customerDto.getId())
                 .orElseThrow(()-> new NotFoundException("Customer by id=" + customerDto.getId() + " not found"));
         customer.setCustomerName(customerDto.getCustomerName());

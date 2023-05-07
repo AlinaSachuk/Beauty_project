@@ -1,7 +1,7 @@
 package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Procedure;
-import com.beauty_project.domain.request.CreateUpdateProcedureDto;
+import com.beauty_project.domain.request.ProcedureRequestDto;
 import com.beauty_project.repository.ProcedureRepository;
 import com.beauty_project.service.ProcedureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class ProcedureServiceImpl implements ProcedureService {
         return procedureRepository.findAll();
     }
 
-    public Procedure createProcedure(CreateUpdateProcedureDto procedureDto) {
+    public Procedure createProcedure(ProcedureRequestDto procedureDto) {
         Procedure procedure = new Procedure();
         procedure.setServiceName(procedureDto.getServiceName());
         procedure.setDuration(procedureDto.getDuration());
@@ -37,7 +37,7 @@ public class ProcedureServiceImpl implements ProcedureService {
         return procedureRepository.save(procedure);
     }
 
-    public Procedure updateProcedure(CreateUpdateProcedureDto procedureDto) {
+    public Procedure updateProcedure(ProcedureRequestDto procedureDto) {
         Procedure procedure = procedureRepository.findById(procedureDto.getId())
                 .orElseThrow(()-> new NotFoundException("Procedure by id=" + procedureDto.getId() + " not found"));
         procedure.setServiceName(procedureDto.getServiceName());

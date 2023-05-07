@@ -1,12 +1,10 @@
 package com.beauty_project.domain.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@Data
 @AllArgsConstructor
 public class AuthenticationCustomerDto {
 
