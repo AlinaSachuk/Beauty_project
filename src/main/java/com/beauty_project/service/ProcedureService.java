@@ -1,7 +1,7 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Procedure;
-import com.beauty_project.domain.dto.CreateUpdateProcedureDto;
+import com.beauty_project.domain.request.CreateUpdateProcedureDto;
 
 import java.util.List;
 

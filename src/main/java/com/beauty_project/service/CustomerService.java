@@ -1,8 +1,8 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Customer;
-import com.beauty_project.domain.dto.RegistrationCustomerDto;
-import com.beauty_project.domain.dto.UpdateCustomerDto;
+import com.beauty_project.domain.request.RegistrationCustomerDto;
+import com.beauty_project.domain.request.UpdateCustomerDto;
 
 import java.util.List;
 

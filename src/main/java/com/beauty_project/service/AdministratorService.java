@@ -1,7 +1,7 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Administrator;
-import com.beauty_project.domain.dto.RegistrationAdminDto;
+import com.beauty_project.domain.request.RegistrationAdminDto;
 import org.springframework.web.bind.annotation.PathVariable;
 
 public interface AdministratorService {

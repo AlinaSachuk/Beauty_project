@@ -1,7 +1,7 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Employee;
-import com.beauty_project.domain.dto.CreateUpdateEmployeeDto;
+import com.beauty_project.domain.request.CreateUpdateEmployeeDto;
 
 import java.util.List;
 

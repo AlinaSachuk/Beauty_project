@@ -1,8 +1,8 @@
 package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Customer;
-import com.beauty_project.domain.dto.RegistrationCustomerDto;
-import com.beauty_project.domain.dto.UpdateCustomerDto;
+import com.beauty_project.domain.request.RegistrationCustomerDto;
+import com.beauty_project.domain.request.UpdateCustomerDto;
 import com.beauty_project.repository.CustomerRepository;
 import com.beauty_project.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;

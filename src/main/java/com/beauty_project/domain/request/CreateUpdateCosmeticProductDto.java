@@ -1,4 +1,4 @@
-package com.beauty_project.domain.dto;
+package com.beauty_project.domain.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

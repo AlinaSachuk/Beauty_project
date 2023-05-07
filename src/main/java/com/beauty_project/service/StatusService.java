@@ -1,7 +1,7 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Status;
-import com.beauty_project.domain.dto.CreateUpdateStatusDto;
+import com.beauty_project.domain.request.CreateUpdateStatusDto;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Visit;
-import com.beauty_project.domain.dto.CreateVisitDto;
-import com.beauty_project.domain.dto.UpdateVisitDto;
+import com.beauty_project.domain.request.CreateVisitDto;
+import com.beauty_project.domain.request.UpdateVisitDto;
 import com.beauty_project.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

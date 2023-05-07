@@ -1,7 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.Status;
-import com.beauty_project.domain.dto.CreateUpdateStatusDto;
+import com.beauty_project.domain.request.CreateUpdateStatusDto;
 import com.beauty_project.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

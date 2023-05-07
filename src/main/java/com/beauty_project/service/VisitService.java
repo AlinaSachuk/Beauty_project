@@ -1,8 +1,8 @@
 package com.beauty_project.service;
 
 import com.beauty_project.domain.Visit;
-import com.beauty_project.domain.dto.CreateVisitDto;
-import com.beauty_project.domain.dto.UpdateVisitDto;
+import com.beauty_project.domain.request.CreateVisitDto;
+import com.beauty_project.domain.request.UpdateVisitDto;
 
 import java.util.List;
 

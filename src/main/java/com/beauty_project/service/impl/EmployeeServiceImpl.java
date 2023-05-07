@@ -1,7 +1,7 @@
 package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Employee;
-import com.beauty_project.domain.dto.CreateUpdateEmployeeDto;
+import com.beauty_project.domain.request.CreateUpdateEmployeeDto;
 import com.beauty_project.repository.EmployeeRepository;
 import com.beauty_project.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;

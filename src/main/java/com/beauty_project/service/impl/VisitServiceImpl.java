@@ -2,8 +2,8 @@ package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.Visit;
-import com.beauty_project.domain.dto.CreateVisitDto;
-import com.beauty_project.domain.dto.UpdateVisitDto;
+import com.beauty_project.domain.request.CreateVisitDto;
+import com.beauty_project.domain.request.UpdateVisitDto;
 import com.beauty_project.repository.CustomerRepository;
 import com.beauty_project.repository.StatusRepository;
 import com.beauty_project.repository.VisitRepository;

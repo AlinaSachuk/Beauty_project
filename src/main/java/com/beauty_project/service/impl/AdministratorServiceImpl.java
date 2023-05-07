@@ -1,7 +1,7 @@
 package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Administrator;
-import com.beauty_project.domain.dto.RegistrationAdminDto;
+import com.beauty_project.domain.request.RegistrationAdminDto;
 import com.beauty_project.repository.AdministratorRepository;
 import com.beauty_project.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
