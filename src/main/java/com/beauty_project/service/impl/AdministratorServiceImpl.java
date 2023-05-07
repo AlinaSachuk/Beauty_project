@@ -2,6 +2,7 @@ package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Administrator;
 import com.beauty_project.domain.request.RegistrationAdminDto;
+import com.beauty_project.domain.response.AdministratorResponseDto;
 import com.beauty_project.repository.AdministratorRepository;
 import com.beauty_project.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +23,20 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
-    public Administrator getAdminByLogin(String login) {
-        return administratorRepository.findAdministratorByLogin(login)
-                .orElseThrow(()-> new NotFoundException("Administrator by login=" + login + " not found"));
+    public AdministratorResponseDto getAdminByLogin(String login) {
+        Administrator administrator = administratorRepository.findAdministratorByLogin(login)
+                .orElseThrow(() -> new NotFoundException("Administrator by login=" + login + " not found"));
+        return new AdministratorResponseDto(administrator.getId(), administrator.getLogin());
     }
 
     @Override
-    public Administrator adminRegistration(RegistrationAdminDto registrationAdminDto) {
+    public AdministratorResponseDto adminRegistration(RegistrationAdminDto registrationAdminDto) {
         Administrator administrator = new Administrator();
         administrator.setLogin(registrationAdminDto.getLogin());
         administrator.setPassword(passwordEncoder.encode(registrationAdminDto.getPassword()));
         administrator.setRole(ADMIN_ROLE);
-        return administratorRepository.save(administrator);
+        Administrator savedAdministrator = administratorRepository.save(administrator);
+        return new AdministratorResponseDto(savedAdministrator.getId(), savedAdministrator.getLogin());
     }
 
     @Override

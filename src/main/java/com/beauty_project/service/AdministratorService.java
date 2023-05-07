@@ -1,13 +1,13 @@
 package com.beauty_project.service;
 
-import com.beauty_project.domain.Administrator;
 import com.beauty_project.domain.request.RegistrationAdminDto;
+import com.beauty_project.domain.response.AdministratorResponseDto;
 import org.springframework.web.bind.annotation.PathVariable;
 
 public interface AdministratorService {
-    Administrator getAdminByLogin(@PathVariable String login);
+    AdministratorResponseDto getAdminByLogin(@PathVariable String login);
 
-    Administrator adminRegistration(RegistrationAdminDto registrationAdminDto);
+    AdministratorResponseDto adminRegistration(RegistrationAdminDto registrationAdminDto);
 
     void deleteAdmin(@PathVariable int id);
 }

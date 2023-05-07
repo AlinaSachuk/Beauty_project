@@ -1,8 +1,8 @@
 package com.beauty_project.domain.response;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 
-@Data
+@AllArgsConstructor
 public class AdministratorResponseDto {
     private int id;
     private String login;
