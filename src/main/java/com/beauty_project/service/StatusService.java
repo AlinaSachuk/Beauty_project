@@ -1,18 +1,18 @@
 package com.beauty_project.service;
 
-import com.beauty_project.domain.Status;
 import com.beauty_project.domain.request.StatusRequestDto;
+import com.beauty_project.domain.response.StatusResponseDto;
 
 import java.util.List;
 
 public interface StatusService {
-    Status getStatusById(int id);
+    StatusResponseDto getStatusById(int id);
 
-    List<Status> getAllStatus();
+    List<StatusResponseDto> getAllStatus();
 
-    Status createStatus(StatusRequestDto statusDto);
+    StatusResponseDto createStatus(StatusRequestDto statusDto);
 
-    Status updateStatus(StatusRequestDto statusDto);
+    StatusResponseDto updateStatus(StatusRequestDto statusDto);
 
     void deleteStatus(int id);
 }
