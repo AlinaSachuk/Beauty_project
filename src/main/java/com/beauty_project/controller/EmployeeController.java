@@ -1,11 +1,10 @@
 package com.beauty_project.controller;
 
-import com.beauty_project.domain.Employee;
 import com.beauty_project.domain.request.EmployeeRequestDto;
+import com.beauty_project.domain.response.EmployeeResponseDto;
 import com.beauty_project.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -29,31 +29,32 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable int id) {
-        Employee employee = employeeService.getEmployeeById(id);
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+    @ResponseStatus(HttpStatus.OK)
+    public EmployeeResponseDto getEmployeeById(@PathVariable int id) {
+        return employeeService.getEmployeeById(id);
     }
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllEmployees() {
-        List<Employee> list = employeeService.getAllEmployees();
-        return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    @ResponseStatus(HttpStatus.OK)
+    public List<EmployeeResponseDto> getAllEmployees() {
+        return employeeService.getAllEmployees();
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createEmployee(@RequestBody EmployeeRequestDto employeeDto) {
-        employeeService.createEmployee(employeeDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public EmployeeResponseDto createEmployee(@RequestBody EmployeeRequestDto employeeDto) {
+        return employeeService.createEmployee(employeeDto);
     }
 
     @PutMapping
-    public void updateEmployee(@RequestBody EmployeeRequestDto employeeDto) {
-        employeeService.updateEmployee(employeeDto);
+    @ResponseStatus(HttpStatus.OK)
+    public EmployeeResponseDto updateEmployee(@RequestBody EmployeeRequestDto employeeDto) {
+        return employeeService.updateEmployee(employeeDto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable int id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteEmployee(@PathVariable int id) {
         employeeService.deleteEmployee(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

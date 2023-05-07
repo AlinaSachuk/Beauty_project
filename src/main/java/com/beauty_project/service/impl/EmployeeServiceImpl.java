@@ -2,6 +2,7 @@ package com.beauty_project.service.impl;
 
 import com.beauty_project.domain.Employee;
 import com.beauty_project.domain.request.EmployeeRequestDto;
+import com.beauty_project.domain.response.EmployeeResponseDto;
 import com.beauty_project.repository.EmployeeRepository;
 import com.beauty_project.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -19,34 +21,67 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public Employee getEmployeeById(int id) {
-        return employeeRepository.findById(id)
-                .orElseThrow(()-> new NotFoundException("Employee by id=" + id + " not found"));
+    @Override
+    public EmployeeResponseDto getEmployeeById(int id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Employee by id=" + id + " not found"));
+        return new EmployeeResponseDto(
+                employee.getId(),
+                employee.getEmployeeName(),
+                employee.getPosition(),
+                employee.getEducation(),
+                employee.getWorkExperience()
+        );
     }
 
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    @Override
+    public List<EmployeeResponseDto> getAllEmployees() {
+        List<Employee> employees = employeeRepository.findAll();
+        return employees.stream().map(employee -> new EmployeeResponseDto(
+                employee.getId(),
+                employee.getEmployeeName(),
+                employee.getPosition(),
+                employee.getEducation(),
+                employee.getWorkExperience()
+        )).collect(Collectors.toList());
     }
 
-    public Employee createEmployee(EmployeeRequestDto employeeDto) {
+    @Override
+    public EmployeeResponseDto createEmployee(EmployeeRequestDto employeeDto) {
         Employee employee = new Employee();
         employee.setEmployeeName(employee.getEmployeeName());
         employee.setPosition(employee.getPosition());
         employee.setEducation(employee.getEducation());
         employee.setWorkExperience(employee.getWorkExperience());
-        return employeeRepository.save(employee);
+        Employee savedEmployee = employeeRepository.save(employee);
+        return new EmployeeResponseDto(
+                savedEmployee.getId(),
+                savedEmployee.getEmployeeName(),
+                savedEmployee.getPosition(),
+                savedEmployee.getEducation(),
+                savedEmployee.getWorkExperience()
+        );
     }
 
-    public Employee updateEmployee(EmployeeRequestDto employeeDto) {
+    @Override
+    public EmployeeResponseDto updateEmployee(EmployeeRequestDto employeeDto) {
         Employee employee = employeeRepository.findById(employeeDto.getId())
-                .orElseThrow(()-> new NotFoundException("Employee by id=" + employeeDto.getId() + " not found"));
+                .orElseThrow(() -> new NotFoundException("Employee by id=" + employeeDto.getId() + " not found"));
         employee.setEmployeeName(employee.getEmployeeName());
         employee.setPosition(employee.getPosition());
         employee.setEducation(employee.getEducation());
         employee.setWorkExperience(employee.getWorkExperience());
-        return employeeRepository.saveAndFlush(employee);
+        Employee savedEmployee = employeeRepository.save(employee);
+        return new EmployeeResponseDto(
+                savedEmployee.getId(),
+                savedEmployee.getEmployeeName(),
+                savedEmployee.getPosition(),
+                savedEmployee.getEducation(),
+                savedEmployee.getWorkExperience()
+        );
     }
 
+    @Override
     public void deleteEmployee(int id) {
         employeeRepository.deleteById(id);
     }

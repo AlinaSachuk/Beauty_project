@@ -2,17 +2,18 @@ package com.beauty_project.service;
 
 import com.beauty_project.domain.Employee;
 import com.beauty_project.domain.request.EmployeeRequestDto;
+import com.beauty_project.domain.response.EmployeeResponseDto;
 
 import java.util.List;
 
 public interface EmployeeService {
-    Employee getEmployeeById(int id);
+    EmployeeResponseDto getEmployeeById(int id);
 
-    List<Employee> getAllEmployees();
+    List<EmployeeResponseDto> getAllEmployees();
 
-    Employee createEmployee(EmployeeRequestDto employeeDto);
+    EmployeeResponseDto createEmployee(EmployeeRequestDto employeeDto);
 
-    Employee updateEmployee(EmployeeRequestDto employeeDto);
+    EmployeeResponseDto updateEmployee(EmployeeRequestDto employeeDto);
 
     void deleteEmployee(int id);
 }
