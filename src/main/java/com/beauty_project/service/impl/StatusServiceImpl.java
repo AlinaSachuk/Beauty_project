@@ -21,6 +21,7 @@ public class StatusServiceImpl implements StatusService {
         this.statusRepository = statusRepository;
     }
 
+    @Override
     public StatusResponseDto getStatusById(int id) {
         Status status = statusRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Status by id=" + id + " not found"));
@@ -31,6 +32,7 @@ public class StatusServiceImpl implements StatusService {
         );
     }
 
+    @Override
     public List<StatusResponseDto> getAllStatus() {
         List<Status> statusList = statusRepository.findAll();
         return statusList.stream().map(status -> new StatusResponseDto(
@@ -40,6 +42,7 @@ public class StatusServiceImpl implements StatusService {
         )).collect(Collectors.toList());
     }
 
+    @Override
     public StatusResponseDto createStatus(StatusRequestDto statusDto) {
         Status status = new Status();
         status.setStatus(statusDto.getStatus());
@@ -52,6 +55,7 @@ public class StatusServiceImpl implements StatusService {
         );
     }
 
+    @Override
     public StatusResponseDto updateStatus(StatusRequestDto statusDto) {
         Status status = statusRepository.findById(statusDto.getId())
                 .orElseThrow(() -> new NotFoundException("Status by id=" + statusDto.getId() + " not found"));
@@ -65,6 +69,7 @@ public class StatusServiceImpl implements StatusService {
         );
     }
 
+    @Override
     public void deleteStatus(int id) {
         statusRepository.deleteById(id);
     }
