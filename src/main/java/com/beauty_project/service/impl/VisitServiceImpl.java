@@ -3,6 +3,7 @@ package com.beauty_project.service.impl;
 import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.Visit;
 import com.beauty_project.domain.request.VisitRequestDto;
+import com.beauty_project.domain.response.VisitResponseDto;
 import com.beauty_project.repository.CustomerRepository;
 import com.beauty_project.repository.StatusRepository;
 import com.beauty_project.repository.VisitRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VisitServiceImpl implements VisitService {
@@ -26,22 +28,44 @@ public class VisitServiceImpl implements VisitService {
         this.statusRepository = statusRepository;
     }
 
-    public Visit getVisitById(int id) {
-        return visitRepository.findById(id)
+    @Override
+    public VisitResponseDto getVisitById(int id) {
+        Visit visit = visitRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Visit by id=" + id + " not found."));
+        return new VisitResponseDto(
+                visit.getId(),
+                visit.getDateOfVisit(),
+                visit.getFinalPrice(),
+                visit.getCustomerId()
+        );
     }
 
-    public List<Visit> getAllVisits() {
-        return visitRepository.findAll();
+    @Override
+    public List<VisitResponseDto> getAllVisits() {
+        List<Visit> visits = visitRepository.findAll();
+        return visits.stream().map(visit -> new VisitResponseDto(
+                visit.getId(),
+                visit.getDateOfVisit(),
+                visit.getFinalPrice(),
+                visit.getCustomerId()
+        )).collect(Collectors.toList());
     }
 
-    public List<Visit> getAllVisitsForSingleCustomer(int id) {
+    @Override
+    public List<VisitResponseDto> getAllVisitsForSingleCustomer(int id) {
         customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Customer by id=" + id + " not found."));
-        return visitRepository.findVisitsByCustomerId(id);
+        List<Visit> visits = visitRepository.findVisitsByCustomerId(id);
+        return visits.stream().map(visit -> new VisitResponseDto(
+                visit.getId(),
+                visit.getDateOfVisit(),
+                visit.getFinalPrice(),
+                visit.getCustomerId()
+        )).collect(Collectors.toList());
     }
 
-    public Visit createVisit(VisitRequestDto visitDto, int id) {
+    @Override
+    public VisitResponseDto createVisit(VisitRequestDto visitDto, int id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Customer by id=" + id + " not found."));
         Visit visit = new Visit();
@@ -55,18 +79,31 @@ public class VisitServiceImpl implements VisitService {
         if (visit.getFinalPrice() == 0 | visit.getFinalPrice() < 0) {
             throw new ArithmeticException("Incorrect price: " + visit.getFinalPrice());
         }
-        return visitRepository.save(visit);
+        Visit savedVisit = visitRepository.save(visit);
+        return new VisitResponseDto(
+                savedVisit.getId(),
+                savedVisit.getDateOfVisit(),
+                savedVisit.getFinalPrice(),
+                savedVisit.getCustomerId()
+        );
     }
 
-    public Visit updateVisit(VisitUpdateRequestDto visitDto) {
+    @Override
+    public VisitResponseDto updateVisit(VisitRequestDto visitDto) {
         Visit visit = visitRepository.findById(visitDto.getId())
-                .orElseThrow(()-> new NotFoundException("Visit by id=" + visitDto.getId() + " not found"));
+                .orElseThrow(() -> new NotFoundException("Visit by id=" + visitDto.getId() + " not found"));
         visit.setDateOfVisit(visitDto.getDateOfVisit());
         visit.setFinalPrice(visitDto.getFinalPrice());
         if (visit.getFinalPrice() == 0 | visit.getFinalPrice() < 0) {
             throw new ArithmeticException("Incorrect price: " + visit.getFinalPrice());
         }
-        return visitRepository.saveAndFlush(visit);
+        Visit savedVisit = visitRepository.save(visit);
+        return new VisitResponseDto(
+                savedVisit.getId(),
+                savedVisit.getDateOfVisit(),
+                savedVisit.getFinalPrice(),
+                savedVisit.getCustomerId()
+        );
     }
 
     public void deleteVisit(int id) {

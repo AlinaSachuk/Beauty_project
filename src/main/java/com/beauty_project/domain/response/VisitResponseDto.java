@@ -1,10 +1,10 @@
 package com.beauty_project.domain.response;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 
 import java.sql.Date;
 
-@Data
+@AllArgsConstructor
 public class VisitResponseDto {
     private Integer id;
     private Date dateOfVisit;

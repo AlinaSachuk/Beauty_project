@@ -1,10 +1,10 @@
 package com.beauty_project.domain.request;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.sql.Date;
 
-@AllArgsConstructor
+@Data
 public class VisitRequestDto {
     private Integer id;
     private Date dateOfVisit;
