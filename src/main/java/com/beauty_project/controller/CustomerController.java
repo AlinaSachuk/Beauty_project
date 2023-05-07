@@ -1,14 +1,13 @@
 package com.beauty_project.controller;
 
-import com.beauty_project.domain.Customer;
-import com.beauty_project.domain.Visit;
 import com.beauty_project.domain.request.RegistrationCustomerDto;
 import com.beauty_project.domain.request.CustomerUpdateRequestDto;
+import com.beauty_project.domain.response.CustomerResponseDto;
+import com.beauty_project.domain.response.VisitResponseDto;
 import com.beauty_project.service.CustomerService;
 import com.beauty_project.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,37 +33,38 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable int id) {
-        Customer customer = customerService.getCustomerById(id);
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+    @ResponseStatus(HttpStatus.OK)
+    public CustomerResponseDto getCustomerById(@PathVariable int id) {
+        return customerService.getCustomerById(id);
     }
 
     @GetMapping
-    public ResponseEntity<List<Customer>> getAllCustomers() {
-        List<Customer> list = customerService.getAllCustomers();
-        return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    @ResponseStatus(HttpStatus.OK)
+    public List<CustomerResponseDto> getAllCustomers() {
+        return customerService.getAllCustomers();
     }
 
     @GetMapping("/getVisits/{id}")
-    public ResponseEntity<List<Visit>> getAllVisitsForSingleCustomer(@PathVariable int id) {
-        List<Visit> list = visitService.getAllVisitsForSingleCustomer(id);
-        return new ResponseEntity<>(list, (!list.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    @ResponseStatus(HttpStatus.OK)
+    public List<VisitResponseDto> getAllVisitsForSingleCustomer(@PathVariable int id) {
+        return visitService.getAllVisitsForSingleCustomer(id);
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createCustomer(@RequestBody RegistrationCustomerDto customerDto) {
-        customerService.createCustomer(customerDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public CustomerResponseDto createCustomer(@RequestBody RegistrationCustomerDto customerDto) {
+        return customerService.createCustomer(customerDto);
     }
 
     @PutMapping
-    public void updateCustomer(@RequestBody CustomerUpdateRequestDto customerDto) {
-        customerService.updateCustomer(customerDto);
+    @ResponseStatus(HttpStatus.OK)
+    public CustomerResponseDto updateCustomer(@RequestBody CustomerUpdateRequestDto customerDto) {
+        return customerService.updateCustomer(customerDto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable int id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCustomer(@PathVariable int id) {
         customerService.deleteCustomer(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
