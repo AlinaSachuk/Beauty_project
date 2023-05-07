@@ -1,9 +1,10 @@
 package com.beauty_project.domain.response;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 
-@Data
-public class CustomerResponse {
+@AllArgsConstructor
+public class CustomerResponseDto {
+    private int id;
     private String customerName;
     private String telephoneNumber;
     private String email;

@@ -1,19 +1,19 @@
 package com.beauty_project.service;
 
-import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.request.RegistrationCustomerDto;
 import com.beauty_project.domain.request.CustomerUpdateRequestDto;
+import com.beauty_project.domain.response.CustomerResponseDto;
 
 import java.util.List;
 
 public interface CustomerService {
-    Customer getCustomerById(int id);
+    CustomerResponseDto getCustomerById(int id);
 
-    List<Customer> getAllCustomers();
+    List<CustomerResponseDto> getAllCustomers();
 
-    Customer createCustomer(RegistrationCustomerDto customerDto);
+    CustomerResponseDto createCustomer(RegistrationCustomerDto customerDto);
 
-    Customer updateCustomer(CustomerUpdateRequestDto customerDto);
+    CustomerResponseDto updateCustomer(CustomerUpdateRequestDto customerDto);
 
     void deleteCustomer(int id);
 }
