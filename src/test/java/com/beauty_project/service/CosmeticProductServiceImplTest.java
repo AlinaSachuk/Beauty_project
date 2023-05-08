@@ -6,6 +6,7 @@ import com.beauty_project.domain.request.CosmeticProductRequestDto;
 import com.beauty_project.domain.response.CosmeticProductResponseDto;
 import com.beauty_project.repository.CosmeticProductRepository;
 import com.beauty_project.service.impl.CosmeticProductServiceImpl;
+import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -72,17 +73,17 @@ public class CosmeticProductServiceImplTest {
         assertEquals(new CosmeticProductResponseDto(1, "Cream", "Nivea", "Sweden"), actual);
     }
 
-    /*@Test
+    @Test
     public void testUpdate() {
-        var product = Utils.createCosmeticProduct(1, "Cream", "Nivea", "Sweden");
-        when(cosmeticProductRepository.save(any())).thenReturn(product);
-        //when(cosmeticProductService.getCosmeticProductById(1)).thenReturn(product);
+        var savedProduct = Utils.createCosmeticProduct(1, "Cream", "Nivea", "Sweden");
+        var updatedProduct = Utils.createCosmeticProduct(1, "Serum", "Nivea", "Sweden");
+        when(cosmeticProductRepository.findById(1)).thenReturn(Optional.of(savedProduct));
+        when(cosmeticProductRepository.save(any())).thenReturn(updatedProduct);
         CosmeticProductResponseDto actual = cosmeticProductService
                 .updateCosmeticProduct(new CosmeticProductRequestDto(1, "Cream", "Nivea", "Sweden"));
-        when(cosmeticProductRepository.findById(1)).thenReturn(Optional.of(product));
         assertNotNull(actual);
-        assertEquals(new CosmeticProductResponseDto(1, "Cream", "Nivea", "Sweden"), actual);
-    }*/
+        assertEquals(new CosmeticProductResponseDto(1, "Serum", "Nivea", "Sweden"), actual);
+    }
 
     @Test
     public void testDeleteCosmeticProductById() {
