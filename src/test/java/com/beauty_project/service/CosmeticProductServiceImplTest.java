@@ -2,6 +2,8 @@ package com.beauty_project.service;
 
 import com.beauty_project.Utils;
 import com.beauty_project.domain.CosmeticProduct;
+import com.beauty_project.domain.request.CosmeticProductRequestDto;
+import com.beauty_project.domain.response.CosmeticProductResponseDto;
 import com.beauty_project.repository.CosmeticProductRepository;
 import com.beauty_project.service.impl.CosmeticProductServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,7 @@ import org.webjars.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,6 +41,15 @@ public class CosmeticProductServiceImplTest {
     }
 
     @Test
+    public void testGetById() {
+        var product = Utils.createCosmeticProduct(1, "Cream", "Nivea", "Sweden");
+        when(cosmeticProductRepository.findById(1)).thenReturn(Optional.of(product));
+        CosmeticProductResponseDto actual = cosmeticProductService.getCosmeticProductById(1);
+        assertNotNull(actual);
+        assertEquals(new CosmeticProductResponseDto(1, "Cream", "Nivea", "Sweden"), actual);
+    }
+
+    @Test
     public void testGetAllCosmeticProducts() {
         CosmeticProduct product1 = Utils.createCosmeticProduct(1, "Cream", "Nivea", "Sweden");
         CosmeticProduct product2 = Utils.createCosmeticProduct(2, "Cream", "Nivea", "Sweden");
@@ -51,21 +63,25 @@ public class CosmeticProductServiceImplTest {
         assertEquals(2, actual.size());
     }
 
-    /*@Test
+    @Test
     public void testSave() {
         setDataForSaveAndUpdate();
-        CosmeticProduct actual = cosmeticProductService.createCosmeticProduct(
-                new CreateUpdateCosmeticProductDto(1, "Cream", "Nivea", "Sweden"));
+        CosmeticProductResponseDto actual = cosmeticProductService
+                .createCosmeticProduct(new CosmeticProductRequestDto(1,"Cream", "Nivea", "Sweden"));
         assertNotNull(actual);
-        assertEquals(new CreateUpdateCosmeticProductDto(1, "Cream", "Nivea", "Sweden"), actual);
+        assertEquals(new CosmeticProductResponseDto(1, "Cream", "Nivea", "Sweden"), actual);
     }
 
-    @Test
+    /*@Test
     public void testUpdate() {
-        CosmeticProduct actual = cosmeticProductService.updateCosmeticProduct(
-                new CreateUpdateCosmeticProductDto(1,"Cream", "Nivea", "Sweden"));
+        var product = Utils.createCosmeticProduct(1, "Cream", "Nivea", "Sweden");
+        when(cosmeticProductRepository.save(any())).thenReturn(product);
+        //when(cosmeticProductService.getCosmeticProductById(1)).thenReturn(product);
+        CosmeticProductResponseDto actual = cosmeticProductService
+                .updateCosmeticProduct(new CosmeticProductRequestDto(1, "Cream", "Nivea", "Sweden"));
+        when(cosmeticProductRepository.findById(1)).thenReturn(Optional.of(product));
         assertNotNull(actual);
-        assertEquals(new CreateUpdateCosmeticProductDto(1, "Cream", "Nivea", "Sweden"), actual);
+        assertEquals(new CosmeticProductResponseDto(1, "Cream", "Nivea", "Sweden"), actual);
     }*/
 
     @Test
