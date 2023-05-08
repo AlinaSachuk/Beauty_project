@@ -1,5 +1,6 @@
 package com.beauty_project.domain.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -7,6 +8,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Data
+@AllArgsConstructor
 public class CustomerUpdateRequestDto {
     private Integer id;
     private String customerName;
