@@ -66,7 +66,7 @@ public class CosmeticProductServiceImpl implements CosmeticProductService {
         product.setProductName(productDto.getProductName());
         product.setManufacture(productDto.getManufacture());
         product.setCountryOfOrigin(productDto.getCountryOfOrigin());
-        CosmeticProduct savedProduct = cosmeticProductRepository.saveAndFlush(product);
+        CosmeticProduct savedProduct = cosmeticProductRepository.save(product);
         return new CosmeticProductResponseDto(
                 savedProduct.getId(),
                 savedProduct.getProductName(),
