@@ -6,6 +6,7 @@ import com.beauty_project.domain.response.ProcedureResponseDto;
 import java.util.List;
 
 public interface ProcedureService {
+
     ProcedureResponseDto getProcedureById(int id);
 
     List<ProcedureResponseDto> getAllProcedures();

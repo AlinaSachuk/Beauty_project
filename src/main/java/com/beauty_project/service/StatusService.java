@@ -6,6 +6,7 @@ import com.beauty_project.domain.response.StatusResponseDto;
 import java.util.List;
 
 public interface StatusService {
+
     StatusResponseDto getStatusById(int id);
 
     List<StatusResponseDto> getAllStatus();

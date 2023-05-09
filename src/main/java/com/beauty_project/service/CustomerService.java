@@ -7,6 +7,7 @@ import com.beauty_project.domain.response.CustomerResponseDto;
 import java.util.List;
 
 public interface CustomerService {
+
     CustomerResponseDto getCustomerById(int id);
 
     List<CustomerResponseDto> getAllCustomers();

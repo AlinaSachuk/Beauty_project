@@ -6,6 +6,7 @@ import com.beauty_project.domain.response.CosmeticProductResponseDto;
 import java.util.List;
 
 public interface CosmeticProductService {
+
     CosmeticProductResponseDto getCosmeticProductById(int id);
 
     List<CosmeticProductResponseDto> getAllCosmeticProducts();

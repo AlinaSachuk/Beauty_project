@@ -6,6 +6,7 @@ import com.beauty_project.domain.response.VisitResponseDto;
 import java.util.List;
 
 public interface VisitService {
+
     VisitResponseDto getVisitById(int id);
 
     List<VisitResponseDto> getAllVisits();
