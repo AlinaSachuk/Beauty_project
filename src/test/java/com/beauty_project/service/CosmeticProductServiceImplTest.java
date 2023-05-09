@@ -6,7 +6,6 @@ import com.beauty_project.domain.request.CosmeticProductRequestDto;
 import com.beauty_project.domain.response.CosmeticProductResponseDto;
 import com.beauty_project.repository.CosmeticProductRepository;
 import com.beauty_project.service.impl.CosmeticProductServiceImpl;
-import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -68,7 +67,7 @@ public class CosmeticProductServiceImplTest {
     public void testSave() {
         setDataForSaveAndUpdate();
         CosmeticProductResponseDto actual = cosmeticProductService
-                .createCosmeticProduct(new CosmeticProductRequestDto(1,"Cream", "Nivea", "Sweden"));
+                .createCosmeticProduct(new CosmeticProductRequestDto(1, "Cream", "Nivea", "Sweden"));
         assertNotNull(actual);
         assertEquals(new CosmeticProductResponseDto(1, "Cream", "Nivea", "Sweden"), actual);
     }
