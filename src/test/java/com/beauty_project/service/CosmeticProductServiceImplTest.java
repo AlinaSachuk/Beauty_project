@@ -42,11 +42,13 @@ public class CosmeticProductServiceImplTest {
 
     @Test
     public void testGetById() {
-        var product = Utils.createCosmeticProduct(1, "Cream", "Nivea", "Sweden");
+        var product = Utils.createCosmeticProduct(1, "Cream", "Nivea"
+                , "Sweden");
         when(cosmeticProductRepository.findById(1)).thenReturn(Optional.of(product));
         CosmeticProductResponseDto actual = cosmeticProductService.getCosmeticProductById(1);
         assertNotNull(actual);
-        assertEquals(new CosmeticProductResponseDto(1, "Cream", "Nivea", "Sweden"), actual);
+        assertEquals(new CosmeticProductResponseDto(1, "Cream", "Nivea"
+                , "Sweden"), actual);
     }
 
     @Test
@@ -65,11 +67,13 @@ public class CosmeticProductServiceImplTest {
 
     @Test
     public void testSave() {
-        setDataForSaveAndUpdate();
-        CosmeticProductResponseDto actual = cosmeticProductService
-                .createCosmeticProduct(new CosmeticProductRequestDto(1, "Cream", "Nivea", "Sweden"));
+        var product = Utils.createCosmeticProduct(1, "Cream", "Nivea", "Sweden");
+        when(cosmeticProductRepository.save(any())).thenReturn(product);
+        CosmeticProductResponseDto actual = cosmeticProductService.createCosmeticProduct(
+                new CosmeticProductRequestDto(1, "Cream", "Nivea", "Sweden"));
         assertNotNull(actual);
-        assertEquals(new CosmeticProductResponseDto(1, "Cream", "Nivea", "Sweden"), actual);
+        assertEquals(new CosmeticProductResponseDto(1, "Cream", "Nivea"
+                , "Sweden"), actual);
     }
 
     @Test
@@ -78,10 +82,11 @@ public class CosmeticProductServiceImplTest {
         var updatedProduct = Utils.createCosmeticProduct(1, "Serum", "Nivea", "Sweden");
         when(cosmeticProductRepository.findById(1)).thenReturn(Optional.of(savedProduct));
         when(cosmeticProductRepository.save(any())).thenReturn(updatedProduct);
-        CosmeticProductResponseDto actual = cosmeticProductService
-                .updateCosmeticProduct(new CosmeticProductRequestDto(1, "Cream", "Nivea", "Sweden"));
+        CosmeticProductResponseDto actual = cosmeticProductService.updateCosmeticProduct(
+                new CosmeticProductRequestDto(1, "Cream", "Nivea", "Sweden"));
         assertNotNull(actual);
-        assertEquals(new CosmeticProductResponseDto(1, "Serum", "Nivea", "Sweden"), actual);
+        assertEquals(new CosmeticProductResponseDto(1, "Serum", "Nivea"
+                , "Sweden"), actual);
     }
 
     @Test
@@ -94,10 +99,5 @@ public class CosmeticProductServiceImplTest {
     public void testDeleteCosmeticProductByIdWithEmptyResultDataAccessException() {
         doThrow(EmptyResultDataAccessException.class).when(cosmeticProductRepository).deleteById(1);
         assertThrows(EmptyResultDataAccessException.class, () -> cosmeticProductService.deleteCosmeticProduct(1));
-    }
-
-    private void setDataForSaveAndUpdate() {
-        var product = Utils.createCosmeticProduct(1, "Cream", "Nivea", "Sweden");
-        when(cosmeticProductRepository.save(any())).thenReturn(product);
     }
 }
