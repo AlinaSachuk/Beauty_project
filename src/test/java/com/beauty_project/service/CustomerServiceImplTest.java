@@ -2,6 +2,7 @@ package com.beauty_project.service;
 
 import com.beauty_project.Utils;
 import com.beauty_project.domain.Customer;
+import com.beauty_project.domain.response.CustomerResponseDto;
 import com.beauty_project.repository.CustomerRepository;
 import com.beauty_project.service.impl.CustomerServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import org.webjars.NotFoundException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doThrow;
@@ -33,6 +35,18 @@ public class CustomerServiceImplTest {
     public void testGetByIdWithNotFoundException() {
         doThrow(NotFoundException.class).when(customerRepository).findById(1);
         assertThrows(NotFoundException.class, () -> customerService.getCustomerById(1));
+    }
+
+    @Test
+    public void testGetById() {
+        var customer = Utils.createCustomer(1, "Bob", Date.valueOf("2000-05-09")
+                , "80291235689", "bob2000@gmail.com", "bob2000"
+                , "User", "bob2000");
+        when(customerRepository.findById(1)).thenReturn(Optional.of(customer));
+        CustomerResponseDto actual = customerService.getCustomerById(1);
+        assertNotNull(actual);
+        assertEquals(new CustomerResponseDto(1, "Bob", "80291235689"
+                , "bob2000@gmail.com", "bob2000"), actual);
     }
 
     @Test
