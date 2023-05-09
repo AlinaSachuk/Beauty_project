@@ -11,6 +11,7 @@ import com.beauty_project.domain.Visit;
 import java.sql.Date;
 
 public final class Utils {
+
     private Utils() {
     }
 
