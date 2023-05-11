@@ -3,7 +3,6 @@ package com.beauty_project.service.impl;
 import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.request.RegistrationAdminDto;
 import com.beauty_project.domain.response.AdministratorResponseDto;
-import com.beauty_project.domain.response.CustomerResponseDto;
 import com.beauty_project.repository.CustomerRepository;
 import com.beauty_project.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
