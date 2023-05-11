@@ -38,7 +38,7 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     @ResponseStatus(HttpStatus.OK)
     public List<CustomerResponseDto> getAllCustomers() {
         return customerService.getAllCustomers();
@@ -50,13 +50,13 @@ public class CustomerController {
         return visitService.getAllVisitsForSingleCustomer(id);
     }
 
-    @PostMapping
+    @PostMapping("/registration")
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerResponseDto createCustomer(@RequestBody RegistrationCustomerDto customerDto) {
         return customerService.createCustomer(customerDto);
     }
 
-    @PutMapping
+    @PutMapping("/updateInfo")
     @ResponseStatus(HttpStatus.OK)
     public CustomerResponseDto updateCustomer(@RequestBody CustomerUpdateRequestDto customerDto) {
         return customerService.updateCustomer(customerDto);

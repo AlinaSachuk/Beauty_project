@@ -33,7 +33,7 @@ public class VisitController {
         return visitService.getVisitById(id);
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     @ResponseStatus(HttpStatus.OK)
     public List<VisitResponseDto> getAllVisits() {
         return visitService.getAllVisits();
