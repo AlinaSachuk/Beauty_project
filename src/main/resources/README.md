@@ -71,6 +71,7 @@ customers;
 
 * http://localhost:8080/customer/getAll - GET method, shows information about all customers in the beauty saloon;
 * http://localhost:8080/customer/{id} - GET method, shows information about certain customer by ID;
-* http://localhost:8080/customer/registration - POST method, create customer;
 * http://localhost:8080/customer/updateInfo - PUT method, change information about certain customer;
 * http://localhost:8080/customer/{id} - DELETE method, delete customer by ID;
+
+* http://localhost:8080/registration/admin - POST method, create admin in customer table;
