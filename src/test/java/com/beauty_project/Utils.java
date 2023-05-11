@@ -1,6 +1,5 @@
 package com.beauty_project;
 
-import com.beauty_project.domain.Administrator;
 import com.beauty_project.domain.CosmeticProduct;
 import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.Employee;
@@ -75,14 +74,5 @@ public final class Utils {
         visit.setFinalPrice(finalPrice);
         visit.setCustomerId(customerId);
         return visit;
-    }
-
-    public static Administrator createAdministrator(int id, String login, String password, String role) {
-        Administrator administrator = new Administrator();
-        administrator.setId(id);
-        administrator.setLogin(login);
-        administrator.setPassword(password);
-        administrator.setRole(role);
-        return administrator;
     }
 }
