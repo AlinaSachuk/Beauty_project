@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.webjars.NotFoundException;
@@ -30,6 +31,12 @@ public class ExceptionResolver {
     public ResponseEntity<HttpStatus> handleException(ArithmeticException e) {
         log.warn(e.getMessage());
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AuthorizationServiceException.class)
+    public ResponseEntity<HttpStatus> handleException(AuthorizationServiceException e) {
+        log.warn(e.getMessage());
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(Exception.class)
