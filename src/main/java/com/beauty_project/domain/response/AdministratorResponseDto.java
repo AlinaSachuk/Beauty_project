@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class AdministratorResponseDto {
     private int id;
-    private String login;
+    private String name;
 }
