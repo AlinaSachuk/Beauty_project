@@ -9,6 +9,8 @@ import com.beauty_project.repository.StatusRepository;
 import com.beauty_project.repository.VisitRepository;
 import com.beauty_project.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AuthorizationServiceException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -53,15 +55,21 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public List<VisitResponseDto> getAllVisitsForSingleCustomer(int id) {
-        customerRepository.findById(id)
+        String authenticationLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Customer by id=" + id + " not found."));
-        List<Visit> visits = visitRepository.findVisitsByCustomerId(id);
-        return visits.stream().map(visit -> new VisitResponseDto(
-                visit.getId(),
-                visit.getDateOfVisit(),
-                visit.getFinalPrice(),
-                visit.getCustomerId()
-        )).collect(Collectors.toList());
+        if (authenticationLogin.equals(customer.getTelephoneNumber())) {
+            List<Visit> visits = visitRepository.findVisitsByCustomerId(id);
+            return visits.stream().map(visit -> new VisitResponseDto(
+                    visit.getId(),
+                    visit.getDateOfVisit(),
+                    visit.getFinalPrice(),
+                    visit.getCustomerId()
+            )).collect(Collectors.toList());
+        } else {
+            throw new AuthorizationServiceException("Customer with login=" + authenticationLogin
+                    + " trying to get forbidden information about visits.");
+        }
     }
 
     @Override

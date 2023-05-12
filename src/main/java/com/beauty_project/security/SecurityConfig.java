@@ -14,6 +14,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
     private final UserDetailServiceImpl customerUserDetailService;
+    private final String ADMIN_ROLE = "ADMIN";
+    private final String CUSTOMER_ROLE = "CUSTOMER";
 
     @Autowired
     public SecurityConfig(UserDetailServiceImpl userDetailService) {
@@ -23,29 +25,26 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable()
-                .httpBasic().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
                 .authorizeHttpRequests()
-                .antMatchers(HttpMethod.GET, "/procedure/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/product/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/status/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/employee/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/customer/{id}").permitAll()
-                .antMatchers(HttpMethod.GET, "/customer/getAllVisits/{id}").permitAll()
-                .antMatchers(HttpMethod.GET, "/customer/getAll").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/visit/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/customer/registration", "/customer/updateInfo")
+                .antMatchers(HttpMethod.POST, "/customer/registration")
                 .permitAll()
-                .antMatchers(HttpMethod.PUT, "/customer/updateInfo").permitAll()
-                .antMatchers(HttpMethod.POST, "/procedure", "/product", "/status", "/employee", "/visit")
-                .hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/procedure", "/product", "/status", "/employee", "/visit")
-                .hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/procedure/**", "/product/**", "/status/**", "/employee/**")
+                .permitAll()
+                .antMatchers(HttpMethod.PUT, "/procedure", "/product", "/status", "/employee"
+                        , "/visit", "/customer/updateStatus").hasRole(ADMIN_ROLE)
+                .antMatchers(HttpMethod.PUT, "/customer/updateInfo").hasAnyRole(CUSTOMER_ROLE, ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET, "/visit/**", "/customer/getAll").hasRole(ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET, "/customer/{id}", "/customer/getVisits/{id}")
+                .hasAnyRole(CUSTOMER_ROLE, ADMIN_ROLE)
+                .antMatchers(HttpMethod.POST, "/**").hasRole(ADMIN_ROLE)
+                .antMatchers(HttpMethod.DELETE, "/**").hasRole(ADMIN_ROLE)
                 .anyRequest().authenticated()
                 .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .userDetailsService(customerUserDetailService)
+                .httpBasic()
+                .and()
                 .build();
     }
 
