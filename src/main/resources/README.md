@@ -19,6 +19,22 @@ customers;
 * Table _status_table_ - contains information about discounts valid in the beauty saloon;
 * Table _visit_table_ - contains information about customer`s visits to the beauty saloon.
 
+## Available endpoints for all users
+
+* http://localhost:8080/customer/registration - POST method to register in Beauty_project application as a customer.
+
+* http://localhost:8080/product - GET method, shows information about all cosmetic products presented in beauty saloon;
+* http://localhost:8080/product/{id} - GET method, shows actual information about cosmetic product by ID;
+
+* http://localhost:8080/procedure - GET method, shows information about all procedures carried out in the beauty saloon;
+* http://localhost:8080/procedure/{id} - GET method, shows actual information about certain procedure by ID;
+
+* http://localhost:8080/employee - GET method, shows information about all employees in the beauty saloon;
+* http://localhost:8080/employee/{id} - GET method, shows information about certain employee by ID;
+
+* http://localhost:8080/status - GET method, shows information about all statuses in the beauty saloon;
+* http://localhost:8080/status/{id} - GET method, shows information about certain status by ID;
+
 ## Available endpoints for customers
 
 * http://localhost:8080/product - GET method, shows information about all cosmetic products presented in beauty saloon;
@@ -34,8 +50,9 @@ customers;
 * http://localhost:8080/status/{id} - GET method, shows information about certain status by ID;
 
 * http://localhost:8080/customer/{id} - GET method, shows information about certain customer by ID;
-* http://localhost:8080/customer/registration - POST method, create customer;
-* http://localhost:8080/customer/updateInfo - PUT method, change information about certain customer;
+* http://localhost:8080/customer/getVisits/{id} - GET method, shows information about all visits of customer by ID; 
+* http://localhost:8080/customer/registration - POST method, create new customer;
+* http://localhost:8080/customer/updateInfo - PUT method, change information about certain customer.
 
 ## Available endpoints for admin
 
@@ -71,7 +88,10 @@ customers;
 
 * http://localhost:8080/customer/getAll - GET method, shows information about all customers in the beauty saloon;
 * http://localhost:8080/customer/{id} - GET method, shows information about certain customer by ID;
+* http://localhost:8080/customer/getVisits/{id} - GET method, shows information about all visits of customer by ID;
+* http://localhost:8080/customer/registration - POST method, create new customer;
+* http://localhost:8080/customer/updateStatus - PUT method, change status for customer;
 * http://localhost:8080/customer/updateInfo - PUT method, change information about certain customer;
 * http://localhost:8080/customer/{id} - DELETE method, delete customer by ID;
 
-* http://localhost:8080/registration/admin - POST method, create admin in customer table;
+* http://localhost:8080/admin/registration - POST method, create admin in customer table.
