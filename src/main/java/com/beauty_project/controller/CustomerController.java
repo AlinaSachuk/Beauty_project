@@ -1,7 +1,9 @@
 package com.beauty_project.controller;
 
+import com.beauty_project.domain.request.CustomerStatusUpdateRequestDto;
 import com.beauty_project.domain.request.RegistrationCustomerDto;
 import com.beauty_project.domain.request.CustomerUpdateRequestDto;
+import com.beauty_project.domain.response.CustomerNewStatusResponseDto;
 import com.beauty_project.domain.response.CustomerResponseDto;
 import com.beauty_project.domain.response.VisitResponseDto;
 import com.beauty_project.service.CustomerService;
@@ -60,6 +62,12 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     public CustomerResponseDto updateCustomer(@RequestBody CustomerUpdateRequestDto customerDto) {
         return customerService.updateCustomer(customerDto);
+    }
+
+    @PutMapping("/updateStatus")
+    @ResponseStatus(HttpStatus.OK)
+    public CustomerNewStatusResponseDto updateCustomersStatus(@RequestBody CustomerStatusUpdateRequestDto customerDto) {
+        return customerService.updateCustomersStatus(customerDto);
     }
 
     @DeleteMapping("/{id}")
