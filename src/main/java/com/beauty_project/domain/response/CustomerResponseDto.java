@@ -11,4 +11,5 @@ public class CustomerResponseDto {
     private String telephoneNumber;
     private String email;
     private String instagramAccount;
+    private String status;
 }
