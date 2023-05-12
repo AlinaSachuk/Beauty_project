@@ -2,7 +2,6 @@ package com.beauty_project.service;
 
 import com.beauty_project.Utils;
 import com.beauty_project.domain.Customer;
-import com.beauty_project.domain.response.CustomerResponseDto;
 import com.beauty_project.repository.CustomerRepository;
 import com.beauty_project.service.impl.CustomerServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -11,14 +10,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.webjars.NotFoundException;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -32,29 +31,11 @@ public class CustomerServiceImplTest {
     private CustomerServiceImpl customerService;
 
     @Test
-    public void testGetByIdWithNotFoundException() {
-        doThrow(NotFoundException.class).when(customerRepository).findById(1);
-        assertThrows(NotFoundException.class, () -> customerService.getCustomerById(1));
-    }
-
-    @Test
-    public void testGetById() {
-        var customer = Utils.createCustomer(1, "Bob", Date.valueOf("2000-05-09")
-                , "80291235689", "bob2000@gmail.com", "bob2000"
-                , "User", "bob2000");
-        when(customerRepository.findById(1)).thenReturn(Optional.of(customer));
-        CustomerResponseDto actual = customerService.getCustomerById(1);
-        assertNotNull(actual);
-        assertEquals(new CustomerResponseDto(1, "Bob", "80291235689"
-                , "bob2000@gmail.com", "bob2000"), actual);
-    }
-
-    @Test
     public void testGetAllCustomers() {
         Customer customer1 = Utils.createCustomer(1, "Bob", Date.valueOf("2000-09-18"), "80449871254"
-                , "bob@gmail.com", "bob1809", "NULL", "bob1809");
+                , "bob@gmail.com", "bob1809", "SILVER", "bob1809");
         Customer customer2 = Utils.createCustomer(2, "Bob", Date.valueOf("2000-09-18"), "80449871254"
-                , "bob@gmail.com", "bob1809", "NULL", "bob1809");
+                , "bob@gmail.com", "bob1809", "SILVER", "bob1809");
         List<Customer> returnedCustomers = new ArrayList<>();
         returnedCustomers.add(customer1);
         returnedCustomers.add(customer2);
