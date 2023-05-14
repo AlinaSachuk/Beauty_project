@@ -34,9 +34,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerResponseDto getCustomerById(int id) {
         String authenticationLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+        Customer securityCustomer = customerRepository.findCustomerByTelephoneNumber(authenticationLogin)
+                .orElseThrow(() -> new NotFoundException("Customer with phone number=" + authenticationLogin
+                        + " not found."));
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Customer by id=" + id + " not found"));
-        if (authenticationLogin.equals(customer.getTelephoneNumber())) {
+        if (authenticationLogin.equals(customer.getTelephoneNumber()) | (securityCustomer.getRole()).equals("ADMIN")) {
             return new CustomerResponseDto(
                     customer.getId(),
                     customer.getCustomerName(),

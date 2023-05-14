@@ -56,9 +56,12 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public List<VisitResponseDto> getAllVisitsForSingleCustomer(int id) {
         String authenticationLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+        Customer securityCustomer = customerRepository.findCustomerByTelephoneNumber(authenticationLogin)
+                .orElseThrow(() -> new NotFoundException("Customer with phone number=" + authenticationLogin
+                        + " not found."));
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Customer by id=" + id + " not found."));
-        if (authenticationLogin.equals(customer.getTelephoneNumber())) {
+        if (authenticationLogin.equals(customer.getTelephoneNumber()) | (securityCustomer.getRole()).equals("ADMIN")) {
             List<Visit> visits = visitRepository.findVisitsByCustomerId(id);
             return visits.stream().map(visit -> new VisitResponseDto(
                     visit.getId(),
