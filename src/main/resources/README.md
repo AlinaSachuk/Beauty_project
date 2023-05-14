@@ -9,7 +9,6 @@ customers with giving discount for them in the future.
 Application use PostgreSQL database. For start the application you need Postgres server (jdbc:postgresql://localhost:
 5432/beauty_db) with created database 'beauty_db'. Database contains eight tables.
 
-* Table _admin_table_ - contains authorization information and roles for administrators;
 * Table _customer_table_ - contains personal information, authorization information and roles of beauty saloon 
 customers;
 * Table _employee_table_ - contains information about beauty saloon staff;
