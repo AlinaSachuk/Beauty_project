@@ -49,7 +49,7 @@ public class StatusController {
     @Operation(description = "Finding all statuses.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "All statuses found successfully"),
-            @ApiResponse(responseCode = "404", description = "Status not found.")
+            @ApiResponse(responseCode = "404", description = "Statuses not found.")
     })
     @ResponseStatus(HttpStatus.OK)
     public List<StatusResponseDto> getAllStatus() {
