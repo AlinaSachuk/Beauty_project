@@ -44,7 +44,7 @@ public class VisitController {
         return visitService.getVisitById(id);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping
     @Operation(description = "Finding all visits.")
     @ApiResponse(responseCode = "200", description = "All visits found successfully.")
     @ResponseStatus(HttpStatus.OK)

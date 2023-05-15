@@ -53,7 +53,7 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping
     @Operation(description = "Finding all customers.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "All customers found successfully"),
