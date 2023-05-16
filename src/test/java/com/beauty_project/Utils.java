@@ -3,7 +3,6 @@ package com.beauty_project;
 import com.beauty_project.domain.CosmeticProduct;
 import com.beauty_project.domain.Customer;
 import com.beauty_project.domain.Employee;
-import com.beauty_project.domain.Procedure;
 import com.beauty_project.domain.Status;
 import com.beauty_project.domain.Visit;
 
@@ -20,16 +19,6 @@ public final class Utils {
         testStatus.setPercent(percent);
         testStatus.setId(id);
         return testStatus;
-    }
-
-    public static Procedure createProcedure(Integer id, String serviceName, int duration, int price, String description) {
-        Procedure procedure = new Procedure();
-        procedure.setId(id);
-        procedure.setServiceName(serviceName);
-        procedure.setDuration(duration);
-        procedure.setPrice(price);
-        procedure.setDescription(description);
-        return procedure;
     }
 
     public static Employee createEmployee(Integer id, String employeeName, String position
