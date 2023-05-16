@@ -79,7 +79,10 @@ public class CustomerController {
 
     @PostMapping("/registration")
     @Operation(description = "Creating customer")
-    @ApiResponse(responseCode = "201", description = "Customer created successfully.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Customer created successfully."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: customer not created.")
+    })
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerResponseDto createCustomer(@RequestBody RegistrationCustomerDto customerDto) {
         return customerService.createCustomer(customerDto);
@@ -89,6 +92,7 @@ public class CustomerController {
     @Operation(description = "Updating information about customer.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Customer`s  information updated successfully."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: customer not updated."),
             @ApiResponse(responseCode = "404", description = "Requested customer not found.")
     })
     @ResponseStatus(HttpStatus.OK)

@@ -30,7 +30,10 @@ public class AdministratorController {
 
     @PostMapping("/registration")
     @Operation(description = "Creating administrator")
-    @ApiResponse(responseCode = "201", description = "Administrator created successfully.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Administrator created successfully."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: administrator not created.")
+    })
     @ResponseStatus(HttpStatus.CREATED)
     public AdministratorResponseDto createAdmin(@RequestBody RegistrationAdminDto adminDto) {
         return administratorService.createAdmin(adminDto);

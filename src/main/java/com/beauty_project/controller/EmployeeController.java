@@ -59,6 +59,10 @@ public class EmployeeController {
 
     @PostMapping
     @Operation(description = "Creating employee")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Employee created successfully."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: employee not created.")
+    })
     @ApiResponse(responseCode = "201", description = "Employee created successfully.")
     @ResponseStatus(HttpStatus.CREATED)
     public EmployeeResponseDto createEmployee(@RequestBody EmployeeRequestDto employeeDto) {
@@ -69,6 +73,7 @@ public class EmployeeController {
     @Operation(description = "Updating information about employee.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Employee`s information updated successfully."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: employee not created."),
             @ApiResponse(responseCode = "404", description = "Requested employee not found.")
     })
     @ResponseStatus(HttpStatus.OK)

@@ -58,7 +58,10 @@ public class CosmeticProductController {
 
     @PostMapping
     @Operation(description = "Creating cosmetic product.")
-    @ApiResponse(responseCode = "201", description = "Cosmetic product created successfully.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Cosmetic product created successfully."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: cosmetic product not created.")
+    })
     @ResponseStatus(HttpStatus.CREATED)
     public CosmeticProductResponseDto createCosmeticProduct(@RequestBody CosmeticProductRequestDto productDto) {
         return cosmeticProductService.createCosmeticProduct(productDto);
@@ -68,6 +71,7 @@ public class CosmeticProductController {
     @Operation(description = "Updating cosmetic product.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cosmetic product updated successfully."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: cosmetic product not created."),
             @ApiResponse(responseCode = "404", description = "Requested cosmetic product not found.")
     })
     @ResponseStatus(HttpStatus.OK)

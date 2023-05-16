@@ -58,6 +58,10 @@ public class ProcedureController {
 
     @PostMapping
     @Operation(description = "Creating procedure")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Procedure created successfully."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: procedure not created.")
+    })
     @ApiResponse(responseCode = "201", description = "Procedure created successfully.")
     @ResponseStatus(HttpStatus.CREATED)
     public ProcedureResponseDto createProcedure(@RequestBody ProcedureRequestDto procedureDto) {
@@ -68,6 +72,7 @@ public class ProcedureController {
     @Operation(description = "Updating procedure.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Procedure updated successfully."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: procedure not created."),
             @ApiResponse(responseCode = "404", description = "Requested procedure not found.")
     })
     @ResponseStatus(HttpStatus.OK)

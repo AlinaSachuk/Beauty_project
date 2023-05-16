@@ -58,7 +58,10 @@ public class StatusController {
 
     @PostMapping
     @Operation(description = "Creating status")
-    @ApiResponse(responseCode = "201", description = "Status created successfully.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Status created successfully."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: status not created.")
+    })
     @ResponseStatus(HttpStatus.CREATED)
     public StatusResponseDto createStatus(@RequestBody StatusRequestDto statusDto) {
         return statusService.createStatus(statusDto);
@@ -68,6 +71,7 @@ public class StatusController {
     @Operation(description = "Updating status.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Status updated successfully."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: status not created."),
             @ApiResponse(responseCode = "404", description = "Requested status not found.")
     })
     @ResponseStatus(HttpStatus.OK)

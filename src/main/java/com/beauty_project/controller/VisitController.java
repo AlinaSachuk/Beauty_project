@@ -57,6 +57,7 @@ public class VisitController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Visit created successfully."),
             @ApiResponse(responseCode = "400", description = "Incorrect price entered."),
+            @ApiResponse(responseCode = "400", description = "Something wrong: visit not created."),
             @ApiResponse(responseCode = "404", description = "Customer not found.")
     })
     @ResponseStatus(HttpStatus.CREATED)
@@ -70,7 +71,7 @@ public class VisitController {
     @Operation(description = "Updating information about visit.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Visit`s info updated successfully."),
-            @ApiResponse(responseCode = "400", description = "Incorrect price entered.")
+            @ApiResponse(responseCode = "400", description = "Something wrong: visit not created.")
     })
     @ResponseStatus(HttpStatus.OK)
     public VisitResponseDto updateVisit(@RequestBody VisitRequestDto visitDto) {
