@@ -83,7 +83,7 @@ create table public.customer_table
     email             varchar,
     instagram_account varchar
         unique,
-    status            varchar default 'NULL'::character varying
+    status            varchar default 'Null'::character varying
         constraint customer_table_status_fk
             references public.status_table (status),
     password          varchar not null,
