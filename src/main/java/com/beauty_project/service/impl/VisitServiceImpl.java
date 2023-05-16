@@ -82,11 +82,12 @@ public class VisitServiceImpl implements VisitService {
         Visit visit = new Visit();
         visit.setDateOfVisit(visitDto.getDateOfVisit());
         visit.setCustomerId(customer.getId());
-        if (customer.getStatus() == null) {
+        if (customer.getStatus().equals("Null")) {
             visit.setFinalPrice(visitDto.getFinalPrice());
+        } else {
+            int discountPercent = statusRepository.findPercentByStatus(customer.getStatus());
+            visit.setFinalPrice(visitDto.getFinalPrice() * (100 - discountPercent) / 100);
         }
-        int discountPercent = statusRepository.findPercentByStatus(customer.getStatus());
-        visit.setFinalPrice(visitDto.getFinalPrice() * (100 - discountPercent) / 100);
         if (visit.getFinalPrice() == 0 | visit.getFinalPrice() < 0) {
             throw new ArithmeticException("Incorrect price: " + visit.getFinalPrice());
         }
