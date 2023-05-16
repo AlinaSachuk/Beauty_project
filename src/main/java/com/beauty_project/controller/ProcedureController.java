@@ -1,6 +1,7 @@
 package com.beauty_project.controller;
 
 import com.beauty_project.domain.request.ProcedureRequestDto;
+import com.beauty_project.domain.response.AllProceduresResponseDto;
 import com.beauty_project.domain.response.ProcedureResponseDto;
 import com.beauty_project.service.ProcedureService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,7 +53,7 @@ public class ProcedureController {
             @ApiResponse(responseCode = "404", description = "Procedures not found.")
     })
     @ResponseStatus(HttpStatus.OK)
-    public List<ProcedureResponseDto> getAllProcedures() {
+    public List<AllProceduresResponseDto> getAllProcedures() {
         return procedureService.getAllProcedures();
     }
 
@@ -62,7 +63,6 @@ public class ProcedureController {
             @ApiResponse(responseCode = "201", description = "Procedure created successfully."),
             @ApiResponse(responseCode = "400", description = "Something wrong: procedure not created.")
     })
-    @ApiResponse(responseCode = "201", description = "Procedure created successfully.")
     @ResponseStatus(HttpStatus.CREATED)
     public ProcedureResponseDto createProcedure(@RequestBody ProcedureRequestDto procedureDto) {
         return procedureService.createProcedure(procedureDto);
