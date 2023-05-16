@@ -5,10 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,7 +42,7 @@ public class Procedure {
     private String description;
 
     @JsonManagedReference
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany()
     @JoinTable(name = "l_proced_prod",
             joinColumns = {@JoinColumn(name = "procedure_id")},
             inverseJoinColumns = {@JoinColumn(name = "prod_id")})
