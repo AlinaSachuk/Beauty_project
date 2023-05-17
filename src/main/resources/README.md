@@ -26,7 +26,8 @@ customers;
 * http://localhost:8080/product/{id} - GET method, shows actual information about cosmetic product by ID;
 
 * http://localhost:8080/procedure - GET method, shows information about all procedures carried out in the beauty saloon;
-* http://localhost:8080/procedure/{id} - GET method, shows actual information about certain procedure by ID;
+* http://localhost:8080/procedure/{id} - GET method, shows actual information about certain procedure by ID with the
+  list of cosmetic products used in the process;
 
 * http://localhost:8080/employee - GET method, shows information about all employees in the beauty saloon;
 * http://localhost:8080/employee/{id} - GET method, shows information about certain employee by ID;
@@ -40,7 +41,8 @@ customers;
 * http://localhost:8080/product/{id} - GET method, shows actual information about cosmetic product by ID;
 
 * http://localhost:8080/procedure - GET method, shows information about all procedures carried out in the beauty saloon;
-* http://localhost:8080/procedure/{id} - GET method, shows actual information about certain procedure by ID;
+* http://localhost:8080/procedure/{id} - GET method, shows actual information about certain procedure by ID with the
+  list of cosmetic products used in the process;
 
 * http://localhost:8080/employee - GET method, shows information about all employees in the beauty saloon;
 * http://localhost:8080/employee/{id} - GET method, shows information about certain employee by ID;
@@ -49,7 +51,7 @@ customers;
 * http://localhost:8080/status/{id} - GET method, shows information about certain status by ID;
 
 * http://localhost:8080/customer/{id} - GET method, shows information about certain customer by ID;
-* http://localhost:8080/customer/getVisits/{id} - GET method, shows information about all visits of customer by ID; 
+* http://localhost:8080/customer/getVisits/{id} - GET method, shows information about all visits of customer by his ID; 
 * http://localhost:8080/customer/registration - POST method, create new customer;
 * http://localhost:8080/customer/updateInfo - PUT method, change information about certain customer.
 
@@ -62,7 +64,8 @@ customers;
 * http://localhost:8080/product/{id} - DELETE method, delete cosmetic product by ID;
 
 * http://localhost:8080/procedure - GET method, shows information about all procedures carried out in the beauty saloon;
-* http://localhost:8080/procedure/{id} - GET method, shows actual information about certain procedure by ID;
+* http://localhost:8080/procedure/{id} - GET method, shows actual information about certain procedure by ID with the 
+list of cosmetic products used in the process;
 * http://localhost:8080/procedure - POST method, create procedure;
 * http://localhost:8080/procedure - PUT method, change information about certain procedure;
 * http://localhost:8080/procedure/{id} - DELETE method, delete procedure by ID;
@@ -79,15 +82,15 @@ customers;
 * http://localhost:8080/status - PUT method, change information about certain status;
 * http://localhost:8080/status/{id} - DELETE method, delete status by ID;
 
-* http://localhost:8080/visit/getAll - GET method, shows information about all visits in the beauty saloon;
+* http://localhost:8080/visit - GET method, shows information about all visits in the beauty saloon;
 * http://localhost:8080/visit/{id} - GET method, shows information about certain visit by ID;
-* http://localhost:8080/visit - POST method, create visit;
+* http://localhost:8080/visit/{id} - POST method, create visit for certain customer;
 * http://localhost:8080/visit - PUT method, change information about certain visit;
 * http://localhost:8080/visit/{id} - DELETE method, delete visit by ID;
 
-* http://localhost:8080/customer/getAll - GET method, shows information about all customers in the beauty saloon;
+* http://localhost:8080/customer - GET method, shows information about all customers in the beauty saloon;
 * http://localhost:8080/customer/{id} - GET method, shows information about certain customer by ID;
-* http://localhost:8080/customer/getVisits/{id} - GET method, shows information about all visits of customer by ID;
+* http://localhost:8080/customer/getVisits/{id} - GET method, shows information about all visits of customer by his ID;
 * http://localhost:8080/customer/registration - POST method, create new customer;
 * http://localhost:8080/customer/updateStatus - PUT method, change status for customer;
 * http://localhost:8080/customer/updateInfo - PUT method, change information about certain customer;
