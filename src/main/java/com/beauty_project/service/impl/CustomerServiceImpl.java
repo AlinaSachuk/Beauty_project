@@ -131,6 +131,17 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteCustomer(int id) {
-        customerRepository.deleteById(id);
+        String authenticationLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+        Customer securityCustomer = customerRepository.findCustomerByTelephoneNumber(authenticationLogin)
+                .orElseThrow(() -> new NotFoundException("Customer with phone number=" + authenticationLogin
+                        + " not found."));
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Customer by id=" + id + " not found"));
+        if (authenticationLogin.equals(customer.getTelephoneNumber()) | (securityCustomer.getRole()).equals("ADMIN")) {
+            customerRepository.deleteById(id);
+        } else {
+            throw new AuthorizationServiceException("Customer with login=" + authenticationLogin
+                    + " trying to put forbidden information.");
+        }
     }
 }

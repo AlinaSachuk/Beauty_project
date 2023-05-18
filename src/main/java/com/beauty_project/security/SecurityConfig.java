@@ -37,6 +37,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/customer/{id}", "/customer/getVisits/{id}")
                 .hasAnyRole(CUSTOMER_ROLE, ADMIN_ROLE)
                 .antMatchers(HttpMethod.POST, "/**").hasRole(ADMIN_ROLE)
+                .antMatchers(HttpMethod.DELETE, "/customer/{id}").hasRole(CUSTOMER_ROLE)
                 .antMatchers(HttpMethod.DELETE, "/**").hasRole(ADMIN_ROLE)
                 .anyRequest().authenticated()
                 .and()
